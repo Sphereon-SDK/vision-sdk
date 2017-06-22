@@ -1,0 +1,18 @@
+{
+  "name": "barcode",
+  "version": "0.1.0",
+  "description": "bThe_Barcode_Reader_API_reader_reads_barcodes_from_image_files_and_returns_the_barcode_data_as_JSON_files_bThe_flow_is_generally_as_follows1__First_upload_an_image_using_the_reader_POST_endpoint__You_will_get_back_a_job_response_that_contains_a_job_with_its_associated_settings_2__Start_the_job_from_a_PUT_request_to_the_readerjobid_endpoint_with_the_Job_and_Settings_JSON_as_request_body__The_barcode_detection_will_now_start_3__Check_the_job_status_from_the_readerjobid_GET_endpoint_until_the_status_has_changed_to_DONE_or_ERROR__Messaging_using_a_websocket_will_be_available_as_an_alternative_in_a_future_version4__Retrieve_the_JSON_file_using_the_readerjobidstream_GET_endpoint__This_will_return_the_JSON_file_only_when_the_status_is_DONE__In_other_cases_it_will_return_the_Job_Response_JSON__with_http_code_202_instead_of_200bInteractive_testing_bA_web_based_test_console_is_available_in_the_a_hrefhttpsstore_sphereon_comSphereon_API_Storea",
+  "license": "Apache-2.0",
+  "main": "src/SphereonSDKVision/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --recursive"
+  },
+  "dependencies": {
+    "superagent": "1.7.1"
+  },
+  "devDependencies": {
+    "mocha": "~2.3.4",
+    "sinon": "1.17.3",
+    "expect.js": "~0.3.1"
+  }
+}

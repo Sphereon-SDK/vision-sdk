@@ -1,0 +1,35 @@
+{
+  "lang": "csharp",
+  "packageTitle": "Vision SDK C# .net45",
+  "inputSpec": "swagger.json",
+  "outputDir": "csharp-net45",
+  "verbose": true,
+  "skipOverwrite": false,
+  "templateDir": "src/main/resources",
+  "auth": "hello:world",
+  "apiPackage": "Sphereon.SDK.Vision.Api",
+  "modelPackage": "Sphereon.SDK.Vision.Model",
+  "invokerPackage": "Sphereon.SDK.Vision.Invoker",
+  "groupId": "com.sphereon.sdk",
+  "artifactId": "barcode-sdk-csharp-net45",
+  "artifactVersion": "0.1.0-SNAPSHOT",
+  "systemProperties": {
+    "systemProp1": "value1"
+  },
+  "instantiationTypes": {
+    "hello": "world"
+  },
+  "typeMappings": {
+    "foo": "bar"
+  },
+  "additionalProperties": {
+    "addtProp1": "value2"
+  },
+  "importMappings": {
+    "type1": "import1"
+  },
+  "languageSpecificPrimitives": [
+    "rolex"
+  ],
+  "localVariablePrefix": "_"
+}
