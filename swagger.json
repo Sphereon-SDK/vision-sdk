@@ -1,85 +1,85 @@
 {
   "basePath": "/",
   "paths": {
-    "/barcode/0.1.0/reader/{jobid}": {
-      "get": {
-        "summary": "Job definition and state",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status",
-        "operationId": "getJob",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/ReaderResultJobResponse"},
-            "description": "Read job returned and Job is done or in error"
-          },
-          "202": {
-            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Read job returned and Job is still processing"
-          },
-          "404": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid job id"
-          }
+    "/barcode/0.1/": {"post": {
+      "summary": "Create a new vision job",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Create a new job for the vision operation",
+      "operationId": "createVisionJob",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/VisionJob"},
+          "description": "Vision job"
         },
-        "parameters": [{
-          "in": "path",
-          "name": "jobid",
-          "description": "jobid",
-          "type": "string",
-          "required": true
-        }],
-        "tags": ["BarcodeReader"],
-        "consumes": ["application/json"]
+        "201": {
+          "schema": {"$ref": "#/definitions/VisionJob"},
+          "description": "Created"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid vision settings"
+        }
       },
-      "delete": {
-        "summary": "Delete a job manually",
+      "parameters": [{
+        "schema": {"$ref": "#/definitions/VisionSettings"},
+        "in": "body",
+        "name": "visionSettings",
+        "description": "visionSettings",
+        "required": true
+      }],
+      "tags": ["Vision"],
+      "consumes": ["application/json;charset=UTF-8"]
+    }},
+    "/barcode/0.1/{jobid}/result": {"get": {
+      "summary": "Get classification response of a vision job",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Get classification response of a vision job that completed the classification",
+      "operationId": "getClassificationResult",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/ClassificationResponse"},
+          "description": "Vision job classified"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Classification request could not be processed"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid job id. No response body is supplied"
+        }
+      },
+      "parameters": [{
+        "in": "path",
+        "name": "jobid",
+        "description": "jobid",
+        "type": "string",
+        "required": true
+      }],
+      "tags": ["Vision"],
+      "consumes": ["application/json"]
+    }},
+    "/barcode/0.1/{jobid}": {
+      "post": {
+        "summary": "Upload an image for a vision job",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Delete the Job and all related files",
-        "operationId": "deleteJob",
+        "description": "Upload an image for a vision job. Processing will not be started yet.",
+        "operationId": "uploadFile",
         "responses": {
           "200": {
-            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Job is deleted"
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Image uploaded. The vision job response will be returned in the body."
           },
           "400": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Could not delete all parts"
+            "description": "Image for vision job could not be stored/processed"
           },
           "404": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid job id"
-          }
-        },
-        "parameters": [{
-          "in": "path",
-          "name": "jobid",
-          "description": "jobid",
-          "type": "string",
-          "required": true
-        }],
-        "tags": ["BarcodeReader"],
-        "consumes": ["application/json"]
-      },
-      "put": {
-        "summary": "Submit job for reading",
-        "security": [{"oauth2schema": ["global"]}],
-        "produces": ["application/json;charset=UTF-8"],
-        "description": "Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request",
-        "operationId": "submitJob",
-        "responses": {
-          "200": {
-            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Read job submitted"
-          },
-          "400": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Resubmitted job not allowed because the job is currently processing or already processed and had status DONE"
-          },
-          "404": {
-            "schema": {"$ref": "#/definitions/ErrorResponse"},
-            "description": "Invalid job id"
+            "description": "Invalid job id."
           }
         },
         "parameters": [
@@ -91,37 +91,103 @@
             "required": true
           },
           {
-            "schema": {"$ref": "#/definitions/ReaderJob"},
-            "in": "body",
-            "name": "job",
-            "description": "jobEntity",
+            "in": "formData",
+            "name": "stream",
+            "description": "The binary image to upload for a vision job",
+            "type": "file",
             "required": true
           }
         ],
-        "tags": ["BarcodeReader"],
-        "consumes": ["application/json;charset=UTF-8"]
+        "tags": ["Vision"],
+        "consumes": ["multipart/form-data"]
+      },
+      "get": {
+        "summary": "Get a vision job",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Get a Vision job",
+        "operationId": "getVisionJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Vision job"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job not found"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobid",
+          "description": "jobid",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Vision"],
+        "consumes": ["application/json"]
+      },
+      "delete": {
+        "summary": "Delete a vision job manually",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Delete a vision job manually",
+        "operationId": "deleteVisionJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Vision job deleted"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job failed to delete"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job was already deleted or unknown job id"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobid",
+          "description": "jobid",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Vision"],
+        "consumes": ["application/json"]
+      },
+      "put": {
+        "summary": "Start classification of a vision job",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Start classification of a vision job",
+        "operationId": "classifyJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Classification started. The vision job response will be returned in the body."
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Classification request could not be processed"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid job id. No response body is supplied"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobid",
+          "description": "jobid",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Vision"],
+        "consumes": ["application/json"]
       }
-    },
-    "/barcode/0.1.0/reader": {"post": {
-      "summary": "Upload the file",
-      "security": [{"oauth2schema": ["global"]}],
-      "produces": ["application/json;charset=UTF-8"],
-      "description": "Upload the  image.",
-      "operationId": "uploadFile",
-      "responses": {"200": {
-        "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-        "description": "File uploaded successfully. Reader job created but not started yet"
-      }},
-      "parameters": [{
-        "in": "formData",
-        "name": "stream",
-        "description": "The first image.",
-        "type": "file",
-        "required": true
-      }],
-      "tags": ["BarcodeReader"],
-      "consumes": ["multipart/form-data"]
-    }}
+    }
   },
   "host": "gw.api.cloud.sphereon.com",
   "schemes": ["https"],
@@ -132,100 +198,56 @@
     "flow": "application"
   }},
   "definitions": {
-    "ReaderJobSettings": {
-      "description": "Barcode reader settings",
+    "VisionJob": {
+      "description": "The Vision job. Has access to the job settings.",
       "type": "object",
+      "required": [
+        "inputs",
+        "state"
+      ],
       "properties": {
-        "lifecycle": {"$ref": "#/definitions/Lifecycle"},
-        "outputFileName": {"type": "string"},
-        "engine": {
-          "type": "string",
-          "enum": [
-            "BASIC",
-            "ADVANCED",
-            "PREMIUM"
-          ]
-        },
-        "outputFileFormat": {
-          "type": "string",
-          "enum": ["JSON"]
-        }
-      }
-    },
-    "Barcode": {
-      "type": "object",
-      "properties": {
-        "confidenceLevel": {
-          "format": "double",
-          "description": "The confidence level of the barcode",
-          "readOnly": true,
-          "type": "number"
-        },
-        "pageNo": {
-          "format": "int32",
-          "description": "The number of the page the barcode is on",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "coordinates": {
-          "description": "The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/BarcodeCoordinate"}
-        },
-        "text": {
-          "description": "The text of the barcode",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the barcode",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "AZTEC",
-            "CODABAR",
-            "CODE_39",
-            "CODE_39_EXTENDED",
-            "CODE_93",
-            "CODE_128",
-            "DATA_MATRIX",
-            "EAN_8",
-            "EAN_13",
-            "ITF",
-            "MAXICODE",
-            "PDF_417",
-            "QR_CODE",
-            "RSS_14",
-            "RSS_EXPANDED",
-            "UPC_A",
-            "UPC_E",
-            "UPC_EAN_EXTENSION",
-            "IDENTCODE",
-            "INTERLEAVED25"
-          ]
-        }
-      }
-    },
-    "Lifecycle": {
-      "description": "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file",
-      "type": "object",
-      "properties": {
-        "actionTime": {
+        "completionTime": {
           "format": "date-time",
-          "description": "The time at which the job and files will be deleted, regardless of whether it has been retrieved or not. Maximal time is 1 day from job creation",
+          "description": "The completion date/time of this job in ISO 8601 format",
+          "readOnly": true,
           "type": "string"
         },
-        "action": {
-          "type": "string",
-          "enum": ["DELETE"]
+        "jobId": {"type": "string"},
+        "settings": {"$ref": "#/definitions/VisionSettings"},
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
         },
-        "type": {
+        "inputs": {
+          "description": "The input images. Currently supported inputs are: jpeg, png, bmp",
+          "additionalProperties": {"type": "string"},
+          "type": "object"
+        },
+        "updateTime": {
+          "format": "date-time",
+          "description": "The last update date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "state": {
+          "description": "The status of the job",
+          "readOnly": true,
           "type": "string",
           "enum": [
-            "RETRIEVAL",
-            "TIME"
+            "INPUTS_UPLOADED",
+            "PROCESSING",
+            "DONE",
+            "ERROR",
+            "DELETED"
           ]
+        },
+        "queueTime": {
+          "format": "date-time",
+          "description": "The queue date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
@@ -251,233 +273,74 @@
         "message": {"type": "string"}
       }
     },
-    "ReaderJobResponse": {
-      "description": "The Reader job response. Has access to the job, it' s settings as well as engine tasks",
+    "ClassificationResponse": {
       "type": "object",
-      "required": [
-        "inputs",
-        "status"
-      ],
       "properties": {
-        "completionTime": {
-          "format": "date-time",
-          "description": "The completion date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
+        "tagList": {
+          "additionalProperties": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/Tag"}
+          },
+          "type": "object"
         },
         "jobId": {"type": "string"},
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation date/time of this job in ISO 8601 format",
+        "job": {
+          "description": "The vision job",
           "readOnly": true,
-          "type": "string"
+          "$ref": "#/definitions/VisionJob"
         },
-        "inputs": {
-          "description": "The original input files. Currently supported inputs are: tif files",
-          "type": "array",
-          "items": {"type": "string"}
-        },
-        "updateTime": {
-          "format": "date-time",
-          "description": "The last update date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
-        },
-        "job": {"$ref": "#/definitions/ReaderJob"},
-        "statusMessage": {
-          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
-          "readOnly": true,
-          "type": "string"
-        },
-        "tasks": {
-          "description": "The server supplied reader task(s)",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/ReaderEngineTask"}
-        },
-        "queueTime": {
-          "format": "date-time",
-          "description": "The reader queue date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the job",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "INPUTS_UPLOADED",
-            "PROCESSING",
-            "DONE",
-            "ERROR",
-            "DELETED"
-          ]
-        }
-      }
-    },
-    "ReaderEngineTask": {
-      "type": "object",
-      "properties": {
-        "jobId": {
-          "description": "The current job Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "queueId": {
-          "description": "The queue Id provided by a backend system",
-          "readOnly": true,
-          "type": "string"
-        },
-        "engine": {
-          "description": "The Engine being used",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "ADVANCED",
-            "PREMIUM",
-            "BASIC"
-          ]
-        },
-        "inputs": {
-          "description": "The names of the supplied files/inputs",
+        "errors": {
+          "description": "The errors that occurred",
           "readOnly": true,
           "type": "array",
           "items": {"type": "string"}
-        },
-        "documentId": {
-          "description": "The document Id provided by a backend system",
-          "readOnly": true,
-          "type": "string"
-        },
-        "url": {
-          "description": "The URL on the bucketstore for the Barcode file. Only available once the status is DONE",
-          "readOnly": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the Reader task itself",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "REQUESTED",
-            "QUEUED",
-            "PROCESSING",
-            "DONE",
-            "ERROR"
-          ]
         }
       }
     },
-    "ReaderResultJobResponse": {
-      "description": "The Reader job response. Has access to the job, it' s settings as well as engine tasks",
+    "Tag": {
+      "description": "Vision classification tag",
       "type": "object",
-      "required": [
-        "barcodes",
-        "inputs",
-        "status"
-      ],
       "properties": {
-        "completionTime": {
-          "format": "date-time",
-          "description": "The completion date/time of this job in ISO 8601 format",
+        "confidence": {
+          "format": "float",
+          "description": "The confidence the tag is predicted",
+          "readOnly": true,
+          "type": "number"
+        },
+        "name": {
+          "description": "The name of the tag",
           "readOnly": true,
           "type": "string"
-        },
-        "jobId": {"type": "string"},
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
-        },
-        "inputs": {
-          "description": "The original input files. Currently supported inputs are: tif files",
-          "type": "array",
-          "items": {"type": "string"}
-        },
-        "updateTime": {
-          "format": "date-time",
-          "description": "The last update date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
-        },
-        "barcodes": {
-          "description": "The returned barcodes",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/Barcode"}
-        },
-        "job": {"$ref": "#/definitions/ReaderJob"},
-        "statusMessage": {
-          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
-          "readOnly": true,
-          "type": "string"
-        },
-        "tasks": {
-          "description": "The server supplied reader task(s)",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/ReaderEngineTask"}
-        },
-        "queueTime": {
-          "format": "date-time",
-          "description": "The reader queue date/time of this job in ISO 8601 format",
-          "readOnly": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the job",
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "INPUTS_UPLOADED",
-            "PROCESSING",
-            "DONE",
-            "ERROR",
-            "DELETED"
-          ]
         }
       }
     },
-    "ReaderJob": {
-      "description": "The Detector job. Has access to the job settings.",
+    "VisionSettings": {
+      "description": "Vision settings",
       "type": "object",
-      "required": ["jobId"],
       "properties": {
-        "jobId": {
-          "description": "The server generated job jobId. This jobId is checked against the jobId in the request path on every invocation",
-          "type": "string"
+        "storageProvider": {
+          "type": "string",
+          "enum": ["API_SUPPLIER"]
         },
-        "settings": {"$ref": "#/definitions/ReaderJobSettings"}
-      }
-    },
-    "BarcodeCoordinate": {
-      "type": "object",
-      "properties": {
-        "anchor": {
-          "description": "The anchor to which the positions apply",
-          "readOnly": true,
+        "vendor": {
           "type": "string",
           "enum": [
-            "LEFT_TOP",
-            "RIGHT_TOP",
-            "LEFT_BOTTOM",
-            "RIGHT_BOTTOM",
-            "CENTER",
-            "UNKNOWN"
+            "google",
+            "microsoft",
+            "clarifai"
           ]
         },
-        "x": {
-          "format": "int32",
-          "description": "The X position",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "y": {
-          "format": "int32",
-          "description": "The Y position",
-          "readOnly": true,
-          "type": "integer"
+        "detectionTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "LABEL",
+              "TEXT",
+              "FACIAL",
+              "LOGO"
+            ]
+          }
         }
       }
     },
@@ -501,13 +364,13 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>The Barcode Reader API '/reader' reads barcodes from image files and returns the barcode data as JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /reader POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /reader/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /reader/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /reader/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "description": "Sphereon Vision APIs",
     "termsOfService": "https://sphereon.com",
-    "title": "Barcode",
-    "version": "0.1.0"
+    "title": "Vision",
+    "version": "0.1"
   },
   "tags": [{
-    "name": "BarcodeReader",
-    "description": "Barcode reader API"
+    "name": "Vision",
+    "description": "Vision related API"
   }]
 }
