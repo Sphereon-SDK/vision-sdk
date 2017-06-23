@@ -1,4 +1,4 @@
-# Barcode.ErrorResponse
+# Vision.ErrorResponse
 
 ## Properties
 Name | Type | Description | Notes

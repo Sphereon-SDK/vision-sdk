@@ -61,12 +61,12 @@ Please follow the [installation](#installation) instruction and execute the foll
 import com.sphereon.sdk.vision.handler.*;
 import com.sphereon.sdk.vision.handler.auth.*;
 import com.sphereon.sdk.vision.model.*;
-import com.sphereon.sdk.vision.api.BarcodeReaderApi;
+import com.sphereon.sdk.vision.api.VisionApi;
 
 import java.io.File;
 import java.util.*;
 
-public class BarcodeReaderApiExample {
+public class VisionApiExample {
 
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -75,13 +75,13 @@ public class BarcodeReaderApiExample {
         OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
         oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
-        BarcodeReaderApi apiInstance = new BarcodeReaderApi();
+        VisionApi apiInstance = new VisionApi();
         String jobid = "jobid_example"; // String | jobid
         try {
-            ReaderJobResponse result = apiInstance.deleteJob(jobid);
+            VisionJob result = apiInstance.classifyJob(jobid);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling BarcodeReaderApi#deleteJob");
+            System.err.println("Exception when calling VisionApi#classifyJob");
             e.printStackTrace();
         }
     }
@@ -95,24 +95,22 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BarcodeReaderApi* | [**deleteJob**](docs/BarcodeReaderApi.md#deleteJob) | **DELETE** /barcode/0.1.0/reader/{jobid} | Delete a job manually
-*BarcodeReaderApi* | [**getJob**](docs/BarcodeReaderApi.md#getJob) | **GET** /barcode/0.1.0/reader/{jobid} | Job definition and state
-*BarcodeReaderApi* | [**submitJob**](docs/BarcodeReaderApi.md#submitJob) | **PUT** /barcode/0.1.0/reader/{jobid} | Submit job for reading
-*BarcodeReaderApi* | [**uploadFile**](docs/BarcodeReaderApi.md#uploadFile) | **POST** /barcode/0.1.0/reader | Upload the file
+*VisionApi* | [**classifyJob**](docs/VisionApi.md#classifyJob) | **PUT** /barcode/0.1/{jobid} | Start classification of a vision job
+*VisionApi* | [**createVisionJob**](docs/VisionApi.md#createVisionJob) | **POST** /barcode/0.1/ | Create a new vision job
+*VisionApi* | [**deleteVisionJob**](docs/VisionApi.md#deleteVisionJob) | **DELETE** /barcode/0.1/{jobid} | Delete a vision job manually
+*VisionApi* | [**getClassificationResult**](docs/VisionApi.md#getClassificationResult) | **GET** /barcode/0.1/{jobid}/result | Get classification response of a vision job
+*VisionApi* | [**getVisionJob**](docs/VisionApi.md#getVisionJob) | **GET** /barcode/0.1/{jobid} | Get a vision job
+*VisionApi* | [**uploadFile**](docs/VisionApi.md#uploadFile) | **POST** /barcode/0.1/{jobid} | Upload an image for a vision job
 
 
 ## Documentation for Models
 
- - [Barcode](docs/Barcode.md)
- - [BarcodeCoordinate](docs/BarcodeCoordinate.md)
+ - [ClassificationResponse](docs/ClassificationResponse.md)
  - [Error](docs/Error.md)
  - [ErrorResponse](docs/ErrorResponse.md)
- - [Lifecycle](docs/Lifecycle.md)
- - [ReaderEngineTask](docs/ReaderEngineTask.md)
- - [ReaderJob](docs/ReaderJob.md)
- - [ReaderJobResponse](docs/ReaderJobResponse.md)
- - [ReaderJobSettings](docs/ReaderJobSettings.md)
- - [ReaderResultJobResponse](docs/ReaderResultJobResponse.md)
+ - [Tag](docs/Tag.md)
+ - [VisionJob](docs/VisionJob.md)
+ - [VisionSettings](docs/VisionSettings.md)
 
 
 ## Documentation for Authorization
