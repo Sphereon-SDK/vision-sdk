@@ -25,18 +25,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['SphereonSDKVision/ApiClient', 'SphereonSDKVision/model/VisionJob', 'SphereonSDKVision/model/ErrorResponse', 'SphereonSDKVision/model/VisionSettings', 'SphereonSDKVision/model/ClassificationResponse'], factory);
+    define(['SphereonSDKVision/ApiClient', 'SphereonSDKVision/model/VisionJob', 'SphereonSDKVision/model/VisionSettings', 'SphereonSDKVision/model/ErrorResponse', 'SphereonSDKVision/model/ClassificationResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/VisionJob'), require('../model/ErrorResponse'), require('../model/VisionSettings'), require('../model/ClassificationResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/VisionJob'), require('../model/VisionSettings'), require('../model/ErrorResponse'), require('../model/ClassificationResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.Vision) {
       root.Vision = {};
     }
-    root.Vision.VisionApi = factory(root.Vision.ApiClient, root.Vision.VisionJob, root.Vision.ErrorResponse, root.Vision.VisionSettings, root.Vision.ClassificationResponse);
+    root.Vision.VisionApi = factory(root.Vision.ApiClient, root.Vision.VisionJob, root.Vision.VisionSettings, root.Vision.ErrorResponse, root.Vision.ClassificationResponse);
   }
-}(this, function(ApiClient, VisionJob, ErrorResponse, VisionSettings, ClassificationResponse) {
+}(this, function(ApiClient, VisionJob, VisionSettings, ErrorResponse, ClassificationResponse) {
   'use strict';
 
   /**
@@ -55,52 +55,6 @@
   var exports = function(apiClient) {
     this.apiClient = apiClient || ApiClient.instance;
 
-
-    /**
-     * Callback function to receive the result of the classifyJob operation.
-     * @callback module:SphereonSDKVision/api/VisionApi~classifyJobCallback
-     * @param {String} error Error message, if any.
-     * @param {module:SphereonSDKVision/model/VisionJob} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Start classification of a vision job
-     * Start classification of a vision job
-     * @param {String} jobid jobid
-     * @param {module:SphereonSDKVision/api/VisionApi~classifyJobCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:SphereonSDKVision/model/VisionJob}
-     */
-    this.classifyJob = function(jobid, callback) {
-      var postBody = null;
-
-      // verify the required parameter 'jobid' is set
-      if (jobid == undefined || jobid == null) {
-        throw "Missing the required parameter 'jobid' when calling classifyJob";
-      }
-
-
-      var pathParams = {
-        'jobid': jobid
-      };
-      var queryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['oauth2schema'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json;charset=UTF-8'];
-      var returnType = VisionJob;
-
-      return this.apiClient.callApi(
-        '/barcode/0.1/{jobid}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
-      );
-    }
 
     /**
      * Callback function to receive the result of the createVisionJob operation.
@@ -141,7 +95,7 @@
       var returnType = VisionJob;
 
       return this.apiClient.callApi(
-        '/barcode/0.1/', 'POST',
+        '/vision/0.1/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -187,7 +141,7 @@
       var returnType = VisionJob;
 
       return this.apiClient.callApi(
-        '/barcode/0.1/{jobid}', 'DELETE',
+        '/vision/0.1/{jobid}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -202,8 +156,8 @@
      */
 
     /**
-     * Get classification response of a vision job
-     * Get classification response of a vision job that completed the classification
+     * Get classification result of a vision job
+     * Get classification result of a vision job that completed the classification
      * @param {String} jobid jobid
      * @param {module:SphereonSDKVision/api/VisionApi~getClassificationResultCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:SphereonSDKVision/model/ClassificationResponse}
@@ -233,7 +187,7 @@
       var returnType = ClassificationResponse;
 
       return this.apiClient.callApi(
-        '/barcode/0.1/{jobid}/result', 'GET',
+        '/vision/0.1/{jobid}/result', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -279,7 +233,59 @@
       var returnType = VisionJob;
 
       return this.apiClient.callApi(
-        '/barcode/0.1/{jobid}', 'GET',
+        '/vision/0.1/{jobid}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the submitVisionJob operation.
+     * @callback module:SphereonSDKVision/api/VisionApi~submitVisionJobCallback
+     * @param {String} error Error message, if any.
+     * @param {module:SphereonSDKVision/model/VisionJob} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Start classification of a vision job
+     * Start classification of a vision job
+     * @param {String} jobid jobid
+     * @param {module:SphereonSDKVision/model/VisionSettings} settings settings
+     * @param {module:SphereonSDKVision/api/VisionApi~submitVisionJobCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:SphereonSDKVision/model/VisionJob}
+     */
+    this.submitVisionJob = function(jobid, settings, callback) {
+      var postBody = settings;
+
+      // verify the required parameter 'jobid' is set
+      if (jobid == undefined || jobid == null) {
+        throw "Missing the required parameter 'jobid' when calling submitVisionJob";
+      }
+
+      // verify the required parameter 'settings' is set
+      if (settings == undefined || settings == null) {
+        throw "Missing the required parameter 'settings' when calling submitVisionJob";
+      }
+
+
+      var pathParams = {
+        'jobid': jobid
+      };
+      var queryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['oauth2schema'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json;charset=UTF-8'];
+      var returnType = VisionJob;
+
+      return this.apiClient.callApi(
+        '/vision/0.1/{jobid}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -332,7 +338,7 @@
       var returnType = VisionJob;
 
       return this.apiClient.callApi(
-        '/barcode/0.1/{jobid}', 'POST',
+        '/vision/0.1/{jobid}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

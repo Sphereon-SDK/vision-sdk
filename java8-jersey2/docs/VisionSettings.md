@@ -20,9 +20,9 @@ SUPPLIER | &quot;API_SUPPLIER&quot;
 ## Enum: VendorEnum
 Name | Value
 ---- | -----
-GOOGLE | &quot;google&quot;
-MICROSOFT | &quot;microsoft&quot;
-CLARIFAI | &quot;clarifai&quot;
+GOOGLE_VISION | &quot;GOOGLE_VISION&quot;
+MS_AZURE_VISION | &quot;MS_AZURE_VISION&quot;
+CLARIFAI | &quot;CLARIFAI&quot;
 
 
 <a name="List<DetectionTypesEnum>"></a>

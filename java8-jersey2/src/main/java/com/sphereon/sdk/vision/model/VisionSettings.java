@@ -37,7 +37,7 @@ import java.util.List;
  * Vision settings
  */
 @ApiModel(description = "Vision settings")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T00:44:52.436+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:07.831+02:00")
 public class VisionSettings {
   /**
    * Gets or Sets storageProvider
@@ -74,11 +74,11 @@ public class VisionSettings {
    * Gets or Sets vendor
    */
   public enum VendorEnum {
-    GOOGLE("google"),
+    GOOGLE_VISION("GOOGLE_VISION"),
     
-    MICROSOFT("microsoft"),
+    MS_AZURE_VISION("MS_AZURE_VISION"),
     
-    CLARIFAI("clarifai");
+    CLARIFAI("CLARIFAI");
 
     private String value;
 

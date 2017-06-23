@@ -61,22 +61,22 @@ namespace Sphereon.SDK.Vision.Model
         {
             
             /// <summary>
-            /// Enum Google for "google"
+            /// Enum GOOGLEVISION for "GOOGLE_VISION"
             /// </summary>
-            [EnumMember(Value = "google")]
-            Google,
+            [EnumMember(Value = "GOOGLE_VISION")]
+            GOOGLEVISION,
             
             /// <summary>
-            /// Enum Microsoft for "microsoft"
+            /// Enum MSAZUREVISION for "MS_AZURE_VISION"
             /// </summary>
-            [EnumMember(Value = "microsoft")]
-            Microsoft,
+            [EnumMember(Value = "MS_AZURE_VISION")]
+            MSAZUREVISION,
             
             /// <summary>
-            /// Enum Clarifai for "clarifai"
+            /// Enum CLARIFAI for "CLARIFAI"
             /// </summary>
-            [EnumMember(Value = "clarifai")]
-            Clarifai
+            [EnumMember(Value = "CLARIFAI")]
+            CLARIFAI
         }
 
 

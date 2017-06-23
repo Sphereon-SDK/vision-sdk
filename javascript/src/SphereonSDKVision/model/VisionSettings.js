@@ -119,20 +119,20 @@
    */
   exports.VendorEnum = {
     /**
-     * value: "google"
+     * value: "GOOGLE_VISION"
      * @const
      */
-    "google": "google",
+    "GOOGLE_VISION": "GOOGLE_VISION",
     /**
-     * value: "microsoft"
+     * value: "MS_AZURE_VISION"
      * @const
      */
-    "microsoft": "microsoft",
+    "MS_AZURE_VISION": "MS_AZURE_VISION",
     /**
-     * value: "clarifai"
+     * value: "CLARIFAI"
      * @const
      */
-    "clarifai": "clarifai"  };
+    "CLARIFAI": "CLARIFAI"  };
 
   /**
    * Allowed values for the <code>detectionTypes</code> property.

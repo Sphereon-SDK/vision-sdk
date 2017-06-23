@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * ClassificationResponse
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T00:44:43.745+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:03.058+02:00")
 public class ClassificationResponse {
   @SerializedName("tagList")
   private Map<String, List<Tag>> tagList = new HashMap<String, List<Tag>>();

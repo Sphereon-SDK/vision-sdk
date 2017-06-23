@@ -26,121 +26,155 @@
 package com.sphereon.sdk.vision.api;
 
 import com.sphereon.sdk.vision.handler.ApiException;
-import com.sphereon.sdk.vision.model.VisionJob;
-import com.sphereon.sdk.vision.model.ErrorResponse;
-import com.sphereon.sdk.vision.model.VisionSettings;
 import com.sphereon.sdk.vision.model.ClassificationResponse;
-import java.io.File;
+import com.sphereon.sdk.vision.model.VisionJob;
+import com.sphereon.sdk.vision.model.VisionSettings;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.net.URL;
 
 /**
  * API tests for VisionApi
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisionApiTest {
+
+    private static final URL TEST_URL = VisionApiTest.class.getResource("/test2.jpg");
+    private static final String ACCESS_TOKEN = "0dbd17f1-c108-350e-807e-42d13e543b32";
 
     private final VisionApi api = new VisionApi();
 
-    
-    /**
-     * Start classification of a vision job
-     *
-     * Start classification of a vision job
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void classifyJobTest() throws ApiException {
-        String jobid = null;
-        // VisionJob response = api.classifyJob(jobid);
+    private static VisionJob visionJob;
 
-        // TODO: test validations
-    }
-    
     /**
      * Create a new vision job
-     *
+     * <p>
      * Create a new job for the vision operation
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
-    public void createVisionJobTest() throws ApiException {
-        VisionSettings visionSettings = null;
-        // VisionJob response = api.createVisionJob(visionSettings);
+    public void _01_createVisionJobTest() throws ApiException {
+        api.getApiClient().setAccessToken(ACCESS_TOKEN);
+        VisionSettings visionSettings = new VisionSettings();
+        visionSettings.addDetectionTypesItem(VisionSettings.DetectionTypesEnum.LABEL);
+        visionSettings.setStorageProvider(VisionSettings.StorageProviderEnum.SUPPLIER);
+        visionSettings.setVendor(VisionSettings.VendorEnum.MS_AZURE_VISION);
+        VisionApiTest.visionJob = api.createVisionJob(visionSettings);
+        Assert.assertNotNull(visionJob);
+        Assert.assertNotNull(visionJob.getJobId());
 
-        // TODO: test validations
     }
-    
-    /**
-     * Delete a vision job manually
-     *
-     * Delete a vision job manually
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void deleteVisionJobTest() throws ApiException {
-        String jobid = null;
-        // VisionJob response = api.deleteVisionJob(jobid);
 
-        // TODO: test validations
-    }
-    
-    /**
-     * Get classification response of a vision job
-     *
-     * Get classification response of a vision job that completed the classification
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void getClassificationResultTest() throws ApiException {
-        String jobid = null;
-        // ClassificationResponse response = api.getClassificationResult(jobid);
 
-        // TODO: test validations
-    }
-    
-    /**
-     * Get a vision job
-     *
-     * Get a Vision job
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void getVisionJobTest() throws ApiException {
-        String jobid = null;
-        // VisionJob response = api.getVisionJob(jobid);
-
-        // TODO: test validations
-    }
-    
     /**
      * Upload an image for a vision job
-     *
+     * <p>
      * Upload an image for a vision job. Processing will not be started yet.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
-    public void uploadFileTest() throws ApiException {
-        String jobid = null;
-        File stream = null;
-        // VisionJob response = api.uploadFile(jobid, stream);
+    public void _02_uploadFileTest() throws ApiException {
+        String jobid = visionJob.getJobId();
+        File stream = new File(TEST_URL.getFile());
+        VisionJob response = api.uploadFile(jobid, stream);
 
-        // TODO: test validations
+        Assert.assertNotNull(response);
+        Assert.assertEquals(visionJob.getJobId(), response.getJobId());
+        Assert.assertEquals(VisionJob.StateEnum.INPUTS_UPLOADED, response.getState());
+        Assert.assertEquals(1, response.getInputs().size());
     }
-    
+
+
+    /**
+     * Get a vision job
+     * <p>
+     * Get a Vision job
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _03_getVisionJobBeforeStartTest() throws ApiException {
+        VisionJob response = api.getVisionJob(visionJob.getJobId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(VisionJob.StateEnum.INPUTS_UPLOADED, response.getState());
+    }
+
+    /**
+     * Start classification of a vision job
+     * <p>
+     * Start classification of a vision job
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _04_classifyJobTest() throws ApiException {
+        VisionJob response = api.submitVisionJob(visionJob.getJobId(), visionJob.getSettings());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(VisionJob.StateEnum.PROCESSING, response.getState());
+    }
+
+
+    /**
+     * Get a vision job
+     * <p>
+     * Get a Vision job
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _05_getVisionJobAfterStartTest() throws ApiException {
+        VisionJob response = api.getVisionJob(visionJob.getJobId());
+        Assert.assertNotNull(response);
+        Assert.assertTrue(VisionJob.StateEnum.PROCESSING == response.getState() || VisionJob.StateEnum.DONE == response.getState());
+    }
+
+
+    /**
+     * Get classification response of a vision job
+     * <p>
+     * Get classification response of a vision job that completed the classification
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _06_getClassificationResultTest() throws ApiException, InterruptedException {
+        int max = 200;
+        int count = 0;
+
+        VisionJob.StateEnum state = VisionJob.StateEnum.PROCESSING;
+        while (count++ < max && state == VisionJob.StateEnum.PROCESSING) {
+            VisionJob job = api.getVisionJob(visionJob.getJobId());
+            state = job.getState();
+            Thread.sleep(100);
+        }
+        Assert.assertEquals(VisionJob.StateEnum.DONE, state);
+
+        ClassificationResponse response = api.getClassificationResult(visionJob.getJobId());
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getTagList().size() > 0);
+    }
+
+
+    /**
+     * Delete a vision job manually
+     * <p>
+     * Delete a vision job manually
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _07_deleteVisionJobTest() throws ApiException {
+        VisionJob response = api.deleteVisionJob(visionJob.getJobId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(visionJob.getJobId(), response.getJobId());
+    }
+
+
 }

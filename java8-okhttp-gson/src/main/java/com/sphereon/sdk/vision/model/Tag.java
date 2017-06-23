@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Vision classification tag
  */
 @ApiModel(description = "Vision classification tag")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T00:44:43.745+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:03.058+02:00")
 public class Tag {
   @SerializedName("confidence")
   private Float confidence = null;

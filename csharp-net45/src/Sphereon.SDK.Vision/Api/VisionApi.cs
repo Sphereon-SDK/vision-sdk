@@ -37,27 +37,6 @@ namespace Sphereon.SDK.Vision.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Start classification of a vision job
-        /// </summary>
-        /// <remarks>
-        /// Start classification of a vision job
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>VisionJob</returns>
-        VisionJob ClassifyJob (string jobid);
-
-        /// <summary>
-        /// Start classification of a vision job
-        /// </summary>
-        /// <remarks>
-        /// Start classification of a vision job
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>ApiResponse of VisionJob</returns>
-        ApiResponse<VisionJob> ClassifyJobWithHttpInfo (string jobid);
-        /// <summary>
         /// Create a new vision job
         /// </summary>
         /// <remarks>
@@ -100,10 +79,10 @@ namespace Sphereon.SDK.Vision.Api
         /// <returns>ApiResponse of VisionJob</returns>
         ApiResponse<VisionJob> DeleteVisionJobWithHttpInfo (string jobid);
         /// <summary>
-        /// Get classification response of a vision job
+        /// Get classification result of a vision job
         /// </summary>
         /// <remarks>
-        /// Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job that completed the classification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -111,10 +90,10 @@ namespace Sphereon.SDK.Vision.Api
         ClassificationResponse GetClassificationResult (string jobid);
 
         /// <summary>
-        /// Get classification response of a vision job
+        /// Get classification result of a vision job
         /// </summary>
         /// <remarks>
-        /// Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job that completed the classification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -142,6 +121,29 @@ namespace Sphereon.SDK.Vision.Api
         /// <returns>ApiResponse of VisionJob</returns>
         ApiResponse<VisionJob> GetVisionJobWithHttpInfo (string jobid);
         /// <summary>
+        /// Start classification of a vision job
+        /// </summary>
+        /// <remarks>
+        /// Start classification of a vision job
+        /// </remarks>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>VisionJob</returns>
+        VisionJob SubmitVisionJob (string jobid, VisionSettings settings);
+
+        /// <summary>
+        /// Start classification of a vision job
+        /// </summary>
+        /// <remarks>
+        /// Start classification of a vision job
+        /// </remarks>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>ApiResponse of VisionJob</returns>
+        ApiResponse<VisionJob> SubmitVisionJobWithHttpInfo (string jobid, VisionSettings settings);
+        /// <summary>
         /// Upload an image for a vision job
         /// </summary>
         /// <remarks>
@@ -166,27 +168,6 @@ namespace Sphereon.SDK.Vision.Api
         ApiResponse<VisionJob> UploadFileWithHttpInfo (string jobid, System.IO.Stream stream);
         #endregion Synchronous Operations
         #region Asynchronous Operations
-        /// <summary>
-        /// Start classification of a vision job
-        /// </summary>
-        /// <remarks>
-        /// Start classification of a vision job
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>Task of VisionJob</returns>
-        System.Threading.Tasks.Task<VisionJob> ClassifyJobAsync (string jobid);
-
-        /// <summary>
-        /// Start classification of a vision job
-        /// </summary>
-        /// <remarks>
-        /// Start classification of a vision job
-        /// </remarks>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>Task of ApiResponse (VisionJob)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VisionJob>> ClassifyJobAsyncWithHttpInfo (string jobid);
         /// <summary>
         /// Create a new vision job
         /// </summary>
@@ -230,10 +211,10 @@ namespace Sphereon.SDK.Vision.Api
         /// <returns>Task of ApiResponse (VisionJob)</returns>
         System.Threading.Tasks.Task<ApiResponse<VisionJob>> DeleteVisionJobAsyncWithHttpInfo (string jobid);
         /// <summary>
-        /// Get classification response of a vision job
+        /// Get classification result of a vision job
         /// </summary>
         /// <remarks>
-        /// Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job that completed the classification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -241,10 +222,10 @@ namespace Sphereon.SDK.Vision.Api
         System.Threading.Tasks.Task<ClassificationResponse> GetClassificationResultAsync (string jobid);
 
         /// <summary>
-        /// Get classification response of a vision job
+        /// Get classification result of a vision job
         /// </summary>
         /// <remarks>
-        /// Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job that completed the classification
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -271,6 +252,29 @@ namespace Sphereon.SDK.Vision.Api
         /// <param name="jobid">jobid</param>
         /// <returns>Task of ApiResponse (VisionJob)</returns>
         System.Threading.Tasks.Task<ApiResponse<VisionJob>> GetVisionJobAsyncWithHttpInfo (string jobid);
+        /// <summary>
+        /// Start classification of a vision job
+        /// </summary>
+        /// <remarks>
+        /// Start classification of a vision job
+        /// </remarks>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>Task of VisionJob</returns>
+        System.Threading.Tasks.Task<VisionJob> SubmitVisionJobAsync (string jobid, VisionSettings settings);
+
+        /// <summary>
+        /// Start classification of a vision job
+        /// </summary>
+        /// <remarks>
+        /// Start classification of a vision job
+        /// </remarks>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>Task of ApiResponse (VisionJob)</returns>
+        System.Threading.Tasks.Task<ApiResponse<VisionJob>> SubmitVisionJobAsyncWithHttpInfo (string jobid, VisionSettings settings);
         /// <summary>
         /// Upload an image for a vision job
         /// </summary>
@@ -407,161 +411,6 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
-        /// Start classification of a vision job Start classification of a vision job
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>VisionJob</returns>
-        public VisionJob ClassifyJob (string jobid)
-        {
-             ApiResponse<VisionJob> localVarResponse = ClassifyJobWithHttpInfo(jobid);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Start classification of a vision job Start classification of a vision job
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>ApiResponse of VisionJob</returns>
-        public ApiResponse< VisionJob > ClassifyJobWithHttpInfo (string jobid)
-        {
-            // verify the required parameter 'jobid' is set
-            if (jobid == null)
-                throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->ClassifyJob");
-
-            var localVarPath = "/barcode/0.1/{jobid}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ClassifyJob", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<VisionJob>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VisionJob) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VisionJob)));
-            
-        }
-
-        /// <summary>
-        /// Start classification of a vision job Start classification of a vision job
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>Task of VisionJob</returns>
-        public async System.Threading.Tasks.Task<VisionJob> ClassifyJobAsync (string jobid)
-        {
-             ApiResponse<VisionJob> localVarResponse = await ClassifyJobAsyncWithHttpInfo(jobid);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Start classification of a vision job Start classification of a vision job
-        /// </summary>
-        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="jobid">jobid</param>
-        /// <returns>Task of ApiResponse (VisionJob)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VisionJob>> ClassifyJobAsyncWithHttpInfo (string jobid)
-        {
-            // verify the required parameter 'jobid' is set
-            if (jobid == null)
-                throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->ClassifyJob");
-
-            var localVarPath = "/barcode/0.1/{jobid}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new Dictionary<String, String>();
-            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=UTF-8"
-            };
-            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // set "format" to json by default
-            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
-            localVarPathParams.Add("format", "json");
-            if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
-
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ClassifyJob", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<VisionJob>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VisionJob) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VisionJob)));
-            
-        }
-
-        /// <summary>
         /// Create a new vision job Create a new job for the vision operation
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
@@ -585,7 +434,7 @@ namespace Sphereon.SDK.Vision.Api
             if (visionSettings == null)
                 throw new ApiException(400, "Missing required parameter 'visionSettings' when calling VisionApi->CreateVisionJob");
 
-            var localVarPath = "/barcode/0.1/";
+            var localVarPath = "/vision/0.1/";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -670,7 +519,7 @@ namespace Sphereon.SDK.Vision.Api
             if (visionSettings == null)
                 throw new ApiException(400, "Missing required parameter 'visionSettings' when calling VisionApi->CreateVisionJob");
 
-            var localVarPath = "/barcode/0.1/";
+            var localVarPath = "/vision/0.1/";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -754,7 +603,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->DeleteVisionJob");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -832,7 +681,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->DeleteVisionJob");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -886,7 +735,7 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
-        /// Get classification response of a vision job Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job Get classification result of a vision job that completed the classification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -898,7 +747,7 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
-        /// Get classification response of a vision job Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job Get classification result of a vision job that completed the classification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -909,7 +758,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->GetClassificationResult");
 
-            var localVarPath = "/barcode/0.1/{jobid}/result";
+            var localVarPath = "/vision/0.1/{jobid}/result";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -963,7 +812,7 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
-        /// Get classification response of a vision job Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job Get classification result of a vision job that completed the classification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -976,7 +825,7 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
-        /// Get classification response of a vision job Get classification response of a vision job that completed the classification
+        /// Get classification result of a vision job Get classification result of a vision job that completed the classification
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -987,7 +836,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->GetClassificationResult");
 
-            var localVarPath = "/barcode/0.1/{jobid}/result";
+            var localVarPath = "/vision/0.1/{jobid}/result";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1064,7 +913,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->GetVisionJob");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1142,7 +991,7 @@ namespace Sphereon.SDK.Vision.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->GetVisionJob");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1196,6 +1045,187 @@ namespace Sphereon.SDK.Vision.Api
         }
 
         /// <summary>
+        /// Start classification of a vision job Start classification of a vision job
+        /// </summary>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>VisionJob</returns>
+        public VisionJob SubmitVisionJob (string jobid, VisionSettings settings)
+        {
+             ApiResponse<VisionJob> localVarResponse = SubmitVisionJobWithHttpInfo(jobid, settings);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Start classification of a vision job Start classification of a vision job
+        /// </summary>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>ApiResponse of VisionJob</returns>
+        public ApiResponse< VisionJob > SubmitVisionJobWithHttpInfo (string jobid, VisionSettings settings)
+        {
+            // verify the required parameter 'jobid' is set
+            if (jobid == null)
+                throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->SubmitVisionJob");
+            // verify the required parameter 'settings' is set
+            if (settings == null)
+                throw new ApiException(400, "Missing required parameter 'settings' when calling VisionApi->SubmitVisionJob");
+
+            var localVarPath = "/vision/0.1/{jobid}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json;charset=UTF-8"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
+            if (settings != null && settings.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(settings); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = settings; // byte array
+            }
+
+            // authentication (oauth2schema) required
+            // oauth required
+            if (!String.IsNullOrEmpty(Configuration.AccessToken))
+            {
+                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubmitVisionJob", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<VisionJob>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (VisionJob) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VisionJob)));
+            
+        }
+
+        /// <summary>
+        /// Start classification of a vision job Start classification of a vision job
+        /// </summary>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>Task of VisionJob</returns>
+        public async System.Threading.Tasks.Task<VisionJob> SubmitVisionJobAsync (string jobid, VisionSettings settings)
+        {
+             ApiResponse<VisionJob> localVarResponse = await SubmitVisionJobAsyncWithHttpInfo(jobid, settings);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Start classification of a vision job Start classification of a vision job
+        /// </summary>
+        /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="jobid">jobid</param>
+        /// <param name="settings">settings</param>
+        /// <returns>Task of ApiResponse (VisionJob)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<VisionJob>> SubmitVisionJobAsyncWithHttpInfo (string jobid, VisionSettings settings)
+        {
+            // verify the required parameter 'jobid' is set
+            if (jobid == null)
+                throw new ApiException(400, "Missing required parameter 'jobid' when calling VisionApi->SubmitVisionJob");
+            // verify the required parameter 'settings' is set
+            if (settings == null)
+                throw new ApiException(400, "Missing required parameter 'settings' when calling VisionApi->SubmitVisionJob");
+
+            var localVarPath = "/vision/0.1/{jobid}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json;charset=UTF-8"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
+            if (settings != null && settings.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(settings); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = settings; // byte array
+            }
+
+            // authentication (oauth2schema) required
+            // oauth required
+            if (!String.IsNullOrEmpty(Configuration.AccessToken))
+            {
+                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubmitVisionJob", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<VisionJob>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (VisionJob) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VisionJob)));
+            
+        }
+
+        /// <summary>
         /// Upload an image for a vision job Upload an image for a vision job. Processing will not be started yet.
         /// </summary>
         /// <exception cref="Sphereon.SDK.Vision.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1224,7 +1254,7 @@ namespace Sphereon.SDK.Vision.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling VisionApi->UploadFile");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1308,7 +1338,7 @@ namespace Sphereon.SDK.Vision.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling VisionApi->UploadFile");
 
-            var localVarPath = "/barcode/0.1/{jobid}";
+            var localVarPath = "/vision/0.1/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);

@@ -40,7 +40,7 @@ import java.util.Map;
  * The Vision job. Has access to the job settings.
  */
 @ApiModel(description = "The Vision job. Has access to the job settings.")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T00:44:52.436+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:07.831+02:00")
 public class VisionJob {
   @JsonProperty("completionTime")
   private OffsetDateTime completionTime = null;

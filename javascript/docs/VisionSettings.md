@@ -21,11 +21,11 @@ Name | Type | Description | Notes
 ## Enum: VendorEnum
 
 
-* `google` (value: `"google"`)
+* `GOOGLE_VISION` (value: `"GOOGLE_VISION"`)
 
-* `microsoft` (value: `"microsoft"`)
+* `MS_AZURE_VISION` (value: `"MS_AZURE_VISION"`)
 
-* `clarifai` (value: `"clarifai"`)
+* `CLARIFAI` (value: `"CLARIFAI"`)
 
 
 

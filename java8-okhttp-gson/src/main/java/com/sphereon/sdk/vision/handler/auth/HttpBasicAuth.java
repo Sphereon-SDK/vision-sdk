@@ -26,10 +26,13 @@
 package com.sphereon.sdk.vision.handler.auth;
 
 import com.sphereon.sdk.vision.handler.Pair;
+
 import com.squareup.okhttp.Credentials;
 
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+
+import java.io.UnsupportedEncodingException;
 
 public class HttpBasicAuth implements Authentication {
     private String username;

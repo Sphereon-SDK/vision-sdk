@@ -39,8 +39,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 import com.sphereon.sdk.vision.model.VisionJob;
-import com.sphereon.sdk.vision.model.ErrorResponse;
 import com.sphereon.sdk.vision.model.VisionSettings;
+import com.sphereon.sdk.vision.model.ErrorResponse;
 import com.sphereon.sdk.vision.model.ClassificationResponse;
 import java.io.File;
 
@@ -69,113 +69,6 @@ public class VisionApi {
         this.apiClient = apiClient;
     }
 
-    /* Build call for classifyJob */
-    private com.squareup.okhttp.Call classifyJobCall(String jobid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        Object localVarPostBody = null;
-        
-        // verify the required parameter 'jobid' is set
-        if (jobid == null) {
-            throw new ApiException("Missing the required parameter 'jobid' when calling classifyJob(Async)");
-        }
-        
-
-        // create path and map variables
-        String localVarPath = "/barcode/0.1/{jobid}".replaceAll("\\{format\\}","json")
-        .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json;charset=UTF-8"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] { "oauth2schema" };
-        return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-
-    /**
-     * Start classification of a vision job
-     * Start classification of a vision job
-     * @param jobid jobid (required)
-     * @return VisionJob
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public VisionJob classifyJob(String jobid) throws ApiException {
-        ApiResponse<VisionJob> resp = classifyJobWithHttpInfo(jobid);
-        return resp.getData();
-    }
-
-    /**
-     * Start classification of a vision job
-     * Start classification of a vision job
-     * @param jobid jobid (required)
-     * @return ApiResponse&lt;VisionJob&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<VisionJob> classifyJobWithHttpInfo(String jobid) throws ApiException {
-        com.squareup.okhttp.Call call = classifyJobCall(jobid, null, null);
-        Type localVarReturnType = new TypeToken<VisionJob>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Start classification of a vision job (asynchronously)
-     * Start classification of a vision job
-     * @param jobid jobid (required)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call classifyJobAsync(String jobid, final ApiCallback<VisionJob> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = classifyJobCall(jobid, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<VisionJob>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
     /* Build call for createVisionJob */
     private com.squareup.okhttp.Call createVisionJobCall(VisionSettings visionSettings, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = visionSettings;
@@ -187,7 +80,7 @@ public class VisionApi {
         
 
         // create path and map variables
-        String localVarPath = "/barcode/0.1/".replaceAll("\\{format\\}","json");
+        String localVarPath = "/vision/0.1/".replaceAll("\\{format\\}","json");
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
 
@@ -293,7 +186,7 @@ public class VisionApi {
         
 
         // create path and map variables
-        String localVarPath = "/barcode/0.1/{jobid}".replaceAll("\\{format\\}","json")
+        String localVarPath = "/vision/0.1/{jobid}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -400,7 +293,7 @@ public class VisionApi {
         
 
         // create path and map variables
-        String localVarPath = "/barcode/0.1/{jobid}/result".replaceAll("\\{format\\}","json")
+        String localVarPath = "/vision/0.1/{jobid}/result".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -438,8 +331,8 @@ public class VisionApi {
     }
 
     /**
-     * Get classification response of a vision job
-     * Get classification response of a vision job that completed the classification
+     * Get classification result of a vision job
+     * Get classification result of a vision job that completed the classification
      * @param jobid jobid (required)
      * @return ClassificationResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -450,8 +343,8 @@ public class VisionApi {
     }
 
     /**
-     * Get classification response of a vision job
-     * Get classification response of a vision job that completed the classification
+     * Get classification result of a vision job
+     * Get classification result of a vision job that completed the classification
      * @param jobid jobid (required)
      * @return ApiResponse&lt;ClassificationResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -463,8 +356,8 @@ public class VisionApi {
     }
 
     /**
-     * Get classification response of a vision job (asynchronously)
-     * Get classification response of a vision job that completed the classification
+     * Get classification result of a vision job (asynchronously)
+     * Get classification result of a vision job that completed the classification
      * @param jobid jobid (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -507,7 +400,7 @@ public class VisionApi {
         
 
         // create path and map variables
-        String localVarPath = "/barcode/0.1/{jobid}".replaceAll("\\{format\\}","json")
+        String localVarPath = "/vision/0.1/{jobid}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -603,6 +496,121 @@ public class VisionApi {
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
+    /* Build call for submitVisionJob */
+    private com.squareup.okhttp.Call submitVisionJobCall(String jobid, VisionSettings settings, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = settings;
+        
+        // verify the required parameter 'jobid' is set
+        if (jobid == null) {
+            throw new ApiException("Missing the required parameter 'jobid' when calling submitVisionJob(Async)");
+        }
+        
+        // verify the required parameter 'settings' is set
+        if (settings == null) {
+            throw new ApiException("Missing the required parameter 'settings' when calling submitVisionJob(Async)");
+        }
+        
+
+        // create path and map variables
+        String localVarPath = "/vision/0.1/{jobid}".replaceAll("\\{format\\}","json")
+        .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json;charset=UTF-8"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2schema" };
+        return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    /**
+     * Start classification of a vision job
+     * Start classification of a vision job
+     * @param jobid jobid (required)
+     * @param settings settings (required)
+     * @return VisionJob
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public VisionJob submitVisionJob(String jobid, VisionSettings settings) throws ApiException {
+        ApiResponse<VisionJob> resp = submitVisionJobWithHttpInfo(jobid, settings);
+        return resp.getData();
+    }
+
+    /**
+     * Start classification of a vision job
+     * Start classification of a vision job
+     * @param jobid jobid (required)
+     * @param settings settings (required)
+     * @return ApiResponse&lt;VisionJob&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<VisionJob> submitVisionJobWithHttpInfo(String jobid, VisionSettings settings) throws ApiException {
+        com.squareup.okhttp.Call call = submitVisionJobCall(jobid, settings, null, null);
+        Type localVarReturnType = new TypeToken<VisionJob>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Start classification of a vision job (asynchronously)
+     * Start classification of a vision job
+     * @param jobid jobid (required)
+     * @param settings settings (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call submitVisionJobAsync(String jobid, VisionSettings settings, final ApiCallback<VisionJob> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = submitVisionJobCall(jobid, settings, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<VisionJob>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
     /* Build call for uploadFile */
     private com.squareup.okhttp.Call uploadFileCall(String jobid, File stream, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
@@ -619,7 +627,7 @@ public class VisionApi {
         
 
         // create path and map variables
-        String localVarPath = "/barcode/0.1/{jobid}".replaceAll("\\{format\\}","json")
+        String localVarPath = "/vision/0.1/{jobid}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

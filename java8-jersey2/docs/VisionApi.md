@@ -4,66 +4,13 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**classifyJob**](VisionApi.md#classifyJob) | **PUT** /barcode/0.1/{jobid} | Start classification of a vision job
-[**createVisionJob**](VisionApi.md#createVisionJob) | **POST** /barcode/0.1/ | Create a new vision job
-[**deleteVisionJob**](VisionApi.md#deleteVisionJob) | **DELETE** /barcode/0.1/{jobid} | Delete a vision job manually
-[**getClassificationResult**](VisionApi.md#getClassificationResult) | **GET** /barcode/0.1/{jobid}/result | Get classification response of a vision job
-[**getVisionJob**](VisionApi.md#getVisionJob) | **GET** /barcode/0.1/{jobid} | Get a vision job
-[**uploadFile**](VisionApi.md#uploadFile) | **POST** /barcode/0.1/{jobid} | Upload an image for a vision job
+[**createVisionJob**](VisionApi.md#createVisionJob) | **POST** /vision/0.1/ | Create a new vision job
+[**deleteVisionJob**](VisionApi.md#deleteVisionJob) | **DELETE** /vision/0.1/{jobid} | Delete a vision job manually
+[**getClassificationResult**](VisionApi.md#getClassificationResult) | **GET** /vision/0.1/{jobid}/result | Get classification result of a vision job
+[**getVisionJob**](VisionApi.md#getVisionJob) | **GET** /vision/0.1/{jobid} | Get a vision job
+[**submitVisionJob**](VisionApi.md#submitVisionJob) | **PUT** /vision/0.1/{jobid} | Start classification of a vision job
+[**uploadFile**](VisionApi.md#uploadFile) | **POST** /vision/0.1/{jobid} | Upload an image for a vision job
 
-
-<a name="classifyJob"></a>
-# **classifyJob**
-> VisionJob classifyJob(jobid)
-
-Start classification of a vision job
-
-Start classification of a vision job
-
-### Example
-```java
-// Import classes:
-//import com.sphereon.sdk.vision.handler.ApiClient;
-//import com.sphereon.sdk.vision.handler.ApiException;
-//import com.sphereon.sdk.vision.handler.Configuration;
-//import com.sphereon.sdk.vision.handler.auth.*;
-//import com.sphereon.sdk.vision.api.VisionApi;
-
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
-
-VisionApi apiInstance = new VisionApi();
-String jobid = "jobid_example"; // String | jobid
-try {
-    VisionJob result = apiInstance.classifyJob(jobid);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisionApi#classifyJob");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **jobid** | **String**| jobid |
-
-### Return type
-
-[**VisionJob**](VisionJob.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json;charset=UTF-8
 
 <a name="createVisionJob"></a>
 # **createVisionJob**
@@ -175,9 +122,9 @@ Name | Type | Description  | Notes
 # **getClassificationResult**
 > ClassificationResponse getClassificationResult(jobid)
 
-Get classification response of a vision job
+Get classification result of a vision job
 
-Get classification response of a vision job that completed the classification
+Get classification result of a vision job that completed the classification
 
 ### Example
 ```java
@@ -263,6 +210,61 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **jobid** | **String**| jobid |
+
+### Return type
+
+[**VisionJob**](VisionJob.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json;charset=UTF-8
+
+<a name="submitVisionJob"></a>
+# **submitVisionJob**
+> VisionJob submitVisionJob(jobid, settings)
+
+Start classification of a vision job
+
+Start classification of a vision job
+
+### Example
+```java
+// Import classes:
+//import com.sphereon.sdk.vision.handler.ApiClient;
+//import com.sphereon.sdk.vision.handler.ApiException;
+//import com.sphereon.sdk.vision.handler.Configuration;
+//import com.sphereon.sdk.vision.handler.auth.*;
+//import com.sphereon.sdk.vision.api.VisionApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: oauth2schema
+OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
+oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
+
+VisionApi apiInstance = new VisionApi();
+String jobid = "jobid_example"; // String | jobid
+VisionSettings settings = new VisionSettings(); // VisionSettings | settings
+try {
+    VisionJob result = apiInstance.submitVisionJob(jobid, settings);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling VisionApi#submitVisionJob");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **jobid** | **String**| jobid |
+ **settings** | [**VisionSettings**](VisionSettings.md)| settings |
 
 ### Return type
 

@@ -4,64 +4,13 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**classifyJob**](VisionApi.md#classifyJob) | **PUT** /barcode/0.1/{jobid} | Start classification of a vision job
-[**createVisionJob**](VisionApi.md#createVisionJob) | **POST** /barcode/0.1/ | Create a new vision job
-[**deleteVisionJob**](VisionApi.md#deleteVisionJob) | **DELETE** /barcode/0.1/{jobid} | Delete a vision job manually
-[**getClassificationResult**](VisionApi.md#getClassificationResult) | **GET** /barcode/0.1/{jobid}/result | Get classification response of a vision job
-[**getVisionJob**](VisionApi.md#getVisionJob) | **GET** /barcode/0.1/{jobid} | Get a vision job
-[**uploadFile**](VisionApi.md#uploadFile) | **POST** /barcode/0.1/{jobid} | Upload an image for a vision job
+[**createVisionJob**](VisionApi.md#createVisionJob) | **POST** /vision/0.1/ | Create a new vision job
+[**deleteVisionJob**](VisionApi.md#deleteVisionJob) | **DELETE** /vision/0.1/{jobid} | Delete a vision job manually
+[**getClassificationResult**](VisionApi.md#getClassificationResult) | **GET** /vision/0.1/{jobid}/result | Get classification result of a vision job
+[**getVisionJob**](VisionApi.md#getVisionJob) | **GET** /vision/0.1/{jobid} | Get a vision job
+[**submitVisionJob**](VisionApi.md#submitVisionJob) | **PUT** /vision/0.1/{jobid} | Start classification of a vision job
+[**uploadFile**](VisionApi.md#uploadFile) | **POST** /vision/0.1/{jobid} | Upload an image for a vision job
 
-
-<a name="classifyJob"></a>
-# **classifyJob**
-> VisionJob classifyJob(jobid)
-
-Start classification of a vision job
-
-Start classification of a vision job
-
-### Example
-```javascript
-var Vision = require('vision');
-var defaultClient = Vision.ApiClient.default;
-
-// Configure OAuth2 access token for authorization: oauth2schema
-var oauth2schema = defaultClient.authentications['oauth2schema'];
-oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
-
-var apiInstance = new Vision.VisionApi();
-
-var jobid = "jobid_example"; // String | jobid
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-apiInstance.classifyJob(jobid, callback);
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **jobid** | **String**| jobid | 
-
-### Return type
-
-[**VisionJob**](VisionJob.md)
-
-### Authorization
-
-[oauth2schema](../README.md#oauth2schema)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json;charset=UTF-8
 
 <a name="createVisionJob"></a>
 # **createVisionJob**
@@ -169,9 +118,9 @@ Name | Type | Description  | Notes
 # **getClassificationResult**
 > ClassificationResponse getClassificationResult(jobid)
 
-Get classification response of a vision job
+Get classification result of a vision job
 
-Get classification response of a vision job that completed the classification
+Get classification result of a vision job that completed the classification
 
 ### Example
 ```javascript
@@ -253,6 +202,60 @@ apiInstance.getVisionJob(jobid, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **jobid** | **String**| jobid | 
+
+### Return type
+
+[**VisionJob**](VisionJob.md)
+
+### Authorization
+
+[oauth2schema](../README.md#oauth2schema)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json;charset=UTF-8
+
+<a name="submitVisionJob"></a>
+# **submitVisionJob**
+> VisionJob submitVisionJob(jobid, settings)
+
+Start classification of a vision job
+
+Start classification of a vision job
+
+### Example
+```javascript
+var Vision = require('vision');
+var defaultClient = Vision.ApiClient.default;
+
+// Configure OAuth2 access token for authorization: oauth2schema
+var oauth2schema = defaultClient.authentications['oauth2schema'];
+oauth2schema.accessToken = 'YOUR ACCESS TOKEN';
+
+var apiInstance = new Vision.VisionApi();
+
+var jobid = "jobid_example"; // String | jobid
+
+var settings = new Vision.VisionSettings(); // VisionSettings | settings
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.submitVisionJob(jobid, settings, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **jobid** | **String**| jobid | 
+ **settings** | [**VisionSettings**](VisionSettings.md)| settings | 
 
 ### Return type
 

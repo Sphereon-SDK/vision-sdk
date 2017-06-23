@@ -838,7 +838,7 @@ margin-bottom: 20px;
     },
     "vendor" : {
       "type" : "string",
-      "enum" : [ "google", "microsoft", "clarifai" ]
+      "enum" : [ "GOOGLE_VISION", "MS_AZURE_VISION", "CLARIFAI" ]
     },
     "detectionTypes" : {
       "type" : "array",
@@ -870,9 +870,6 @@ margin-bottom: 20px;
 
 
                                 <li class="nav-header" data-group="Vision"><a href="#api-Vision">API Methods - Vision</a></li>
-                                    <li data-group="Vision" data-name="classifyJob" class="">
-                                        <a href="#api-Vision-classifyJob">classifyJob</a>
-                                    </li>
                                     <li data-group="Vision" data-name="createVisionJob" class="">
                                         <a href="#api-Vision-createVisionJob">createVisionJob</a>
                                     </li>
@@ -884,6 +881,9 @@ margin-bottom: 20px;
                                     </li>
                                     <li data-group="Vision" data-name="getVisionJob" class="">
                                         <a href="#api-Vision-getVisionJob">getVisionJob</a>
+                                    </li>
+                                    <li data-group="Vision" data-name="submitVisionJob" class="">
+                                        <a href="#api-Vision-submitVisionJob">submitVisionJob</a>
                                     </li>
                                     <li data-group="Vision" data-name="uploadFile" class="">
                                         <a href="#api-Vision-uploadFile">uploadFile</a>
@@ -926,558 +926,6 @@ margin-bottom: 20px;
 
 
 
-                                    <div id="api-Vision-classifyJob">
-
-                                        <article id="api-Vision-classifyJob-0" data-group="User" data-name="classifyJob" data-version="0">
-                                            <div class="pull-left">
-                                                <h1>classifyJob</h1>
-                                            </div>
-                                            <div class="pull-right">
-
-                                            </div>
-                                            <div class="clearfix"></div>
-
-                                            <p></p>
-                                            <p>Start classification of a vision job</p>
-                                            <p></p>
-                                            <br />
-
-                                            <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/barcode/0.1/{jobid}</span></code></pre>
-
-                                            <p>
-                                                <h3>Usage and SDK Samples</h3>
-                                            </p>
-
-                                            <ul class="nav nav-tabs nav-tabs-examples">
-                                                <li class="active">
-                                                    <a href="#examples-Vision-classifyJob-0-curl">Curl</a>
-                                                </li>
-                                                <li class="">
-              <a href="#examples-Vision-classifyJob-0-java">Java</a>
-            </li>
-            <li class="">
-              <a href="#examples-Vision-classifyJob-0-android">Android</a>
-            </li>
-            <!--<li class="">
-              <a href="#examples-Vision-classifyJob-0-groovy">Groovy</a>
-            </li>-->
-                                                <li class="">
-                                                    <a href="#examples-Vision-classifyJob-0-objc">Obj-C</a>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#examples-Vision-classifyJob-0-javascript">JavaScript</a>
-                                                </li>
-                                                <!--<li class="">
-              <a href="#examples-Vision-classifyJob-0-angular">Angular</a>
-            </li>-->
-                                                <li class="">
-                                                    <a href="#examples-Vision-classifyJob-0-csharp">C#</a>
-                                                </li>
-                                                <li class="">
-              <a href="#examples-Vision-classifyJob-0-php">PHP</a>
-            </li>
-                                            </ul>
-
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Vision-classifyJob-0-curl">
-                                                    <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">put</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/{jobid}"
-
-
-</code></pre>
-                                                </div>
-
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-java">
-                                                  <pre class="prettyprint"><code class="language-java">
-import com.sphereon.sdk.vision.*;
-import com.sphereon.sdk.vision.auth.*;
-import com.sphereon.sdk.vision.model.*;
-import api.VisionApi;
-
-import java.io.File;
-import java.util.*;
-
-public class VisionApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        
-        // Configure OAuth2 access token for authorization: oauth2schema
-        OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-        oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
-
-        VisionApi apiInstance = new VisionApi();
-        String jobid = jobid_example; // String | jobid
-        try {
-            VisionJob result = apiInstance.classifyJob(jobid);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling VisionApi#classifyJob");
-            e.printStackTrace();
-        }
-    }
-}
-
-                                                  </code></pre>
-          </div>
-
-
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-android">
-                                                  <pre class="prettyprint"><code class="language-java">
-import api.VisionApi;
-
-public class VisionApiExample {
-
-    public static void main(String[] args) {
-        VisionApi apiInstance = new VisionApi();
-        String jobid = jobid_example; // String | jobid
-        try {
-            VisionJob result = apiInstance.classifyJob(jobid);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling VisionApi#classifyJob");
-            e.printStackTrace();
-        }
-    }
-}
-
-                                                  </code></pre>
-          </div>
-
-          <!--
-          <div class="tab-pane" id="examples-Vision-classifyJob-0-groovy">
-            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-          </div> -->
-
-
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-objc">
-                                                    <pre class="prettyprint"><code class="language-cpp">
-Configuration *apiConfig = [Configuration sharedConfig];
-
-// Configure OAuth2 access token for authorization: (authentication scheme: oauth2schema)
-[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
-
-
-String *jobid = jobid_example; // jobid
-
-VisionApi *apiInstance = [[VisionApi alloc] init];
-
-// Start classification of a vision job
-[apiInstance classifyJobWith:jobid
-              completionHandler: ^(VisionJob output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-
-                                                    </code></pre>
-                                                </div>
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-javascript">
-                                                    <pre class="prettyprint"><code class="language-js">
-var  = require('');
-var defaultClient = .ApiClient.instance;
-
-// Configure OAuth2 access token for authorization: oauth2schema
-var oauth2schema = defaultClient.authentications['oauth2schema'];
-oauth2schema.accessToken = "YOUR ACCESS TOKEN"
-
-var api = new .VisionApi()
-
-var jobid = jobid_example; // {String} jobid
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.classifyJob(jobid, callback);
-
-                                                    </code></pre>
-                                                </div>
-
-                                                <!--<div class="tab-pane" id="examples-Vision-classifyJob-0-angular">
-            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-          </div>-->
-
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-csharp">
-                                                    <pre class="prettyprint"><code class="language-cs">
-using System;
-using System.Diagnostics;
-using .Api;
-using .Client;
-using model;
-
-namespace Example
-{
-    public class classifyJobExample
-    {
-        public void main()
-        {
-            
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
-            var apiInstance = new VisionApi();
-            var jobid = jobid_example;  // String | jobid
-
-            try
-            {
-                // Start classification of a vision job
-                VisionJob result = apiInstance.classifyJob(jobid);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling VisionApi.classifyJob: " + e.Message );
-            }
-        }
-    }
-}
-
-                                                    </code></pre>
-                                                </div>
-
-
-                                                <div class="tab-pane" id="examples-Vision-classifyJob-0-php">
-                                                  <pre class="prettyprint"><code class="language-php">
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure OAuth2 access token for authorization: oauth2schema
-com.sphereon.sdk.vision\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-$api_instance = new com.sphereon.sdk.vision\Api\VisionApi();
-$jobid = jobid_example; // String | jobid
-
-try {
-    $result = $api_instance->classifyJob($jobid);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling VisionApi->classifyJob: ', $e->getMessage(), PHP_EOL;
-}
-
-                                                  </code></pre>
-          </div>
-
-                                            </div>
-
-
-
-
-
-                                            <h2>Parameters</h2>
-
-
-
-                                                <div class="methodsubtabletitle">Path parameters</div>
-                                                <table id="methodsubtable">
-                                                    <tr>
-                                                        <th width="150px">Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                    <!---->
-                                                        <tr><td style="width:150px;">jobid*</td>
-<td>
-
-
-<script>
-												$(document).ready(function() {
-													var schemaWrapper = {
-  "name" : "jobid",
-  "in" : "path",
-  "description" : "jobid",
-  "required" : true,
-  "type" : "string"
-};
-													var schema = schemaWrapper;
-
-
-
-
-													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_classifyJob_jobid');
-													result.empty();
-													result.append(view.render());
-
-
-
-
-
-												});
-												</script>
-												<div id="d2e199_classifyJob_jobid"></div>
-</td>
-</tr>
-
-                                                </table>
-
-
-
-
-
-                                            <h2>Responses</h2>
-
-                                                <h3> Status: 200 - Classification started. The vision job response will be returned in the body. </h3>
-
-                                                <ul class="nav nav-tabs nav-tabs-examples" >
-
-                                                    <li class="active">
-                                                        <a href="#examples-Vision-classifyJob-schema">Schema</a>
-                                                    </li>
-
-
-                                                </ul>
-
-
-
-
-
-
-
-                                                <div class="tab-content" style='margin-bottom: 10px;'>
-
-
-
-                                                    <div class="tab-pane active" id="examples-Vision-classifyJob-schema">
-
-
-
-
-                                                        <div id='examples-Vision-classifyJob-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    var schemaWrapper = {
-  "description" : "Classification started. The vision job response will be returned in the body.",
-  "schema" : {
-    "$ref" : "#/definitions/VisionJob"
-  }
-};
-                                                                    var schema = schemaWrapper.schema;
-                                                                    schemaWrapper.definitions = defs;
-                                                                    //console.log(JSON.stringify(schema))
-                                                                    JsonRefs.resolveRefs(schemaWrapper, {
-                                                                        "depth": 3,
-                                                                        "resolveRemoteRefs": false,
-                                                                        "resolveFileRefs": false
-                                                                    }, function(err, resolved, metadata) {
-
-                                                                        //console.log(JSON.stringify(resolved));
-
-
-
-                                                                        var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Vision-classifyJob-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Vision-classifyJob-schema-200');
-                                                                        result.empty();
-                                                                        result.append(view.render());
-                                                                    });
-
-
-
-
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                        <input id='examples-Vision-classifyJob-schema-data' type='hidden' value=''></input>
-
-
-
-
-
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-                                                <h3> Status: 400 - Classification request could not be processed </h3>
-
-                                                <ul class="nav nav-tabs nav-tabs-examples" >
-
-                                                    <li class="active">
-                                                        <a href="#examples-Vision-classifyJob-schema">Schema</a>
-                                                    </li>
-
-
-                                                </ul>
-
-
-
-
-
-
-
-                                                <div class="tab-content" style='margin-bottom: 10px;'>
-
-
-
-                                                    <div class="tab-pane active" id="examples-Vision-classifyJob-schema">
-
-
-
-
-                                                        <div id='examples-Vision-classifyJob-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    var schemaWrapper = {
-  "description" : "Classification request could not be processed",
-  "schema" : {
-    "$ref" : "#/definitions/ErrorResponse"
-  }
-};
-                                                                    var schema = schemaWrapper.schema;
-                                                                    schemaWrapper.definitions = defs;
-                                                                    //console.log(JSON.stringify(schema))
-                                                                    JsonRefs.resolveRefs(schemaWrapper, {
-                                                                        "depth": 3,
-                                                                        "resolveRemoteRefs": false,
-                                                                        "resolveFileRefs": false
-                                                                    }, function(err, resolved, metadata) {
-
-                                                                        //console.log(JSON.stringify(resolved));
-
-
-
-                                                                        var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Vision-classifyJob-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Vision-classifyJob-schema-400');
-                                                                        result.empty();
-                                                                        result.append(view.render());
-                                                                    });
-
-
-
-
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                        <input id='examples-Vision-classifyJob-schema-data' type='hidden' value=''></input>
-
-
-
-
-
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-                                                <h3> Status: 404 - Invalid job id. No response body is supplied </h3>
-
-                                                <ul class="nav nav-tabs nav-tabs-examples" >
-
-                                                    <li class="active">
-                                                        <a href="#examples-Vision-classifyJob-schema">Schema</a>
-                                                    </li>
-
-
-                                                </ul>
-
-
-
-
-
-
-
-                                                <div class="tab-content" style='margin-bottom: 10px;'>
-
-
-
-                                                    <div class="tab-pane active" id="examples-Vision-classifyJob-schema">
-
-
-
-
-                                                        <div id='examples-Vision-classifyJob-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    var schemaWrapper = {
-  "description" : "Invalid job id. No response body is supplied",
-  "schema" : {
-    "$ref" : "#/definitions/ErrorResponse"
-  }
-};
-                                                                    var schema = schemaWrapper.schema;
-                                                                    schemaWrapper.definitions = defs;
-                                                                    //console.log(JSON.stringify(schema))
-                                                                    JsonRefs.resolveRefs(schemaWrapper, {
-                                                                        "depth": 3,
-                                                                        "resolveRemoteRefs": false,
-                                                                        "resolveFileRefs": false
-                                                                    }, function(err, resolved, metadata) {
-
-                                                                        //console.log(JSON.stringify(resolved));
-
-
-
-                                                                        var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Vision-classifyJob-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Vision-classifyJob-schema-404');
-                                                                        result.empty();
-                                                                        result.append(view.render());
-                                                                    });
-
-
-
-
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                        <input id='examples-Vision-classifyJob-schema-data' type='hidden' value=''></input>
-
-
-
-
-
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-
-
-
-
-
-                                        </article>
-
-                                    </div>
-
-                                    <hr>
-
-
-
-
-
-
-
-
                                     <div id="api-Vision-createVisionJob">
 
                                         <article id="api-Vision-createVisionJob-0" data-group="User" data-name="createVisionJob" data-version="0">
@@ -1494,7 +942,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/barcode/0.1/</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vision/0.1/</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -1533,7 +981,7 @@ try {
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Vision-createVisionJob-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/"
+curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/"
 
 
 </code></pre>
@@ -2058,7 +1506,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/barcode/0.1/{jobid}</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/vision/0.1/{jobid}</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -2097,7 +1545,7 @@ try {
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Vision-deleteVisionJob-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">delete</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/{jobid}"
+curl -X <span style="text-transform: uppercase;">delete</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/{jobid}"
 
 
 </code></pre>
@@ -2606,11 +2054,11 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>Get classification response of a vision job that completed the classification</p>
+                                            <p>Get classification result of a vision job that completed the classification</p>
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/barcode/0.1/{jobid}/result</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/vision/0.1/{jobid}/result</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -2649,7 +2097,7 @@ try {
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Vision-getClassificationResult-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/{jobid}/result"
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/{jobid}/result"
 
 
 </code></pre>
@@ -2730,7 +2178,7 @@ String *jobid = jobid_example; // jobid
 
 VisionApi *apiInstance = [[VisionApi alloc] init];
 
-// Get classification response of a vision job
+// Get classification result of a vision job
 [apiInstance getClassificationResultWith:jobid
               completionHandler: ^(ClassificationResponse output, NSError* error) {
                             if (output) {
@@ -2796,7 +2244,7 @@ namespace Example
 
             try
             {
-                // Get classification response of a vision job
+                // Get classification result of a vision job
                 ClassificationResponse result = apiInstance.getClassificationResult(jobid);
                 Debug.WriteLine(result);
             }
@@ -3162,7 +2610,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/barcode/0.1/{jobid}</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/vision/0.1/{jobid}</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -3201,7 +2649,7 @@ try {
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Vision-getVisionJob-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/{jobid}"
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/{jobid}"
 
 
 </code></pre>
@@ -3619,6 +3067,619 @@ try {
 
 
 
+                                    <div id="api-Vision-submitVisionJob">
+
+                                        <article id="api-Vision-submitVisionJob-0" data-group="User" data-name="submitVisionJob" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>submitVisionJob</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Start classification of a vision job</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/vision/0.1/{jobid}</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Vision-submitVisionJob-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Vision-submitVisionJob-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Vision-submitVisionJob-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Vision-submitVisionJob-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Vision-submitVisionJob-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Vision-submitVisionJob-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Vision-submitVisionJob-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Vision-submitVisionJob-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Vision-submitVisionJob-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Vision-submitVisionJob-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">put</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/{jobid}"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import com.sphereon.sdk.vision.*;
+import com.sphereon.sdk.vision.auth.*;
+import com.sphereon.sdk.vision.model.*;
+import api.VisionApi;
+
+import java.io.File;
+import java.util.*;
+
+public class VisionApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure OAuth2 access token for authorization: oauth2schema
+        OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
+        oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
+
+        VisionApi apiInstance = new VisionApi();
+        String jobid = jobid_example; // String | jobid
+        VisionSettings settings = ; // VisionSettings | settings
+        try {
+            VisionJob result = apiInstance.submitVisionJob(jobid, settings);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling VisionApi#submitVisionJob");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import api.VisionApi;
+
+public class VisionApiExample {
+
+    public static void main(String[] args) {
+        VisionApi apiInstance = new VisionApi();
+        String jobid = jobid_example; // String | jobid
+        VisionSettings settings = ; // VisionSettings | settings
+        try {
+            VisionJob result = apiInstance.submitVisionJob(jobid, settings);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling VisionApi#submitVisionJob");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Vision-submitVisionJob-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: oauth2schema)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+String *jobid = jobid_example; // jobid
+VisionSettings *settings = ; // settings
+
+VisionApi *apiInstance = [[VisionApi alloc] init];
+
+// Start classification of a vision job
+[apiInstance submitVisionJobWith:jobid
+    settings:settings
+              completionHandler: ^(VisionJob output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+var defaultClient = .ApiClient.instance;
+
+// Configure OAuth2 access token for authorization: oauth2schema
+var oauth2schema = defaultClient.authentications['oauth2schema'];
+oauth2schema.accessToken = "YOUR ACCESS TOKEN"
+
+var api = new .VisionApi()
+
+var jobid = jobid_example; // {String} jobid
+
+var settings = ; // {VisionSettings} settings
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.submitVisionJob(jobid, settings, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Vision-submitVisionJob-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using model;
+
+namespace Example
+{
+    public class submitVisionJobExample
+    {
+        public void main()
+        {
+            
+            // Configure OAuth2 access token for authorization: oauth2schema
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new VisionApi();
+            var jobid = jobid_example;  // String | jobid
+            var settings = new VisionSettings(); // VisionSettings | settings
+
+            try
+            {
+                // Start classification of a vision job
+                VisionJob result = apiInstance.submitVisionJob(jobid, settings);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling VisionApi.submitVisionJob: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Vision-submitVisionJob-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure OAuth2 access token for authorization: oauth2schema
+com.sphereon.sdk.vision\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+$api_instance = new com.sphereon.sdk.vision\Api\VisionApi();
+$jobid = jobid_example; // String | jobid
+$settings = ; // VisionSettings | settings
+
+try {
+    $result = $api_instance->submitVisionJob($jobid, $settings);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VisionApi->submitVisionJob: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">jobid*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "jobid",
+  "in" : "path",
+  "description" : "jobid",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_submitVisionJob_jobid');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_submitVisionJob_jobid"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+                                                <div class="methodsubtabletitle">Body parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">settings <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "in" : "body",
+  "name" : "settings",
+  "description" : "settings",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/VisionSettings"
+  }
+};
+													
+														var schema = schemaWrapper.schema;
+														schemaWrapper.definitions = defs;
+														JsonRefs.resolveRefs(schemaWrapper, {"depth":3, "resolveRemoteRefs":false,"resolveFileRefs":false },function (err, resolved, metadata) {
+														
+
+														
+													var view = new JSONSchemaView(resolved.schema,2,{isBodyParam: true});
+													 
+													var result = $('#d2e199_submitVisionJob_settings');
+													result.empty();
+													result.append(view.render());
+													
+
+													
+    											
+													
+
+
+												});
+
+
+
+												});
+												</script>
+												<div id="d2e199_submitVisionJob_settings"></div>
+</td>
+</tr>
+
+
+                                                </table>
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - Classification started. The vision job response will be returned in the body. </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Vision-submitVisionJob-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Vision-submitVisionJob-schema">
+
+
+
+
+                                                        <div id='examples-Vision-submitVisionJob-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Classification started. The vision job response will be returned in the body.",
+  "schema" : {
+    "$ref" : "#/definitions/VisionJob"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Vision-submitVisionJob-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Vision-submitVisionJob-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Vision-submitVisionJob-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 400 - Classification request could not be processed </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Vision-submitVisionJob-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Vision-submitVisionJob-schema">
+
+
+
+
+                                                        <div id='examples-Vision-submitVisionJob-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Classification request could not be processed",
+  "schema" : {
+    "$ref" : "#/definitions/ErrorResponse"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Vision-submitVisionJob-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Vision-submitVisionJob-schema-400');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Vision-submitVisionJob-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 404 - Invalid job id. No response body is supplied </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Vision-submitVisionJob-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Vision-submitVisionJob-schema">
+
+
+
+
+                                                        <div id='examples-Vision-submitVisionJob-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Invalid job id. No response body is supplied",
+  "schema" : {
+    "$ref" : "#/definitions/ErrorResponse"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Vision-submitVisionJob-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Vision-submitVisionJob-schema-404');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Vision-submitVisionJob-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
                                     <div id="api-Vision-uploadFile">
 
                                         <article id="api-Vision-uploadFile-0" data-group="User" data-name="uploadFile" data-version="0">
@@ -3635,7 +3696,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/barcode/0.1/{jobid}</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vision/0.1/{jobid}</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -3674,7 +3735,7 @@ try {
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Vision-uploadFile-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//barcode/0.1/{jobid}"
+curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "https://gw.api.cloud.sphereon.com//vision/0.1/{jobid}"
 
 
 </code></pre>
@@ -4198,7 +4259,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2017-06-23T00:44:21.925+02:00
+                    Generated 2017-06-23T03:01:54.279+02:00
                 </div>
             </div>
         </div>
