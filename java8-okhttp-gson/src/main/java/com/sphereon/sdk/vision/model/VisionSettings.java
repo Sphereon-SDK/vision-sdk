@@ -25,19 +25,18 @@
 
 package com.sphereon.sdk.vision.model;
 
+import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Vision settings
  */
 @ApiModel(description = "Vision settings")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:03.058+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2018-03-22T01:23:54.925+01:00")
 public class VisionSettings {
   /**
    * Gets or Sets storageProvider

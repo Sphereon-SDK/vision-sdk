@@ -25,7 +25,7 @@
 
 package com.sphereon.sdk.vision.handler;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:03.058+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2018-03-22T01:23:54.925+01:00")
 public class Pair {
     private String name = "";
     private String value = "";

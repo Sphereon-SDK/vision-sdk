@@ -37,6 +37,12 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <scm>
+        <connection>scm:git:git@github.com:Sphereon-SDK/vision-sdk.git</connection>
+        <developerConnection>scm:git:git@github.com:Sphereon-SDK/vision-sdk.git</developerConnection>
+        <url>https://github.com/Sphereon-SDK/vision-sdk</url>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
@@ -48,7 +54,7 @@
                     <pushChanges>false</pushChanges>
                     <localCheckout>true</localCheckout>
                     <!-- Use a better name for the tag -->
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
                 <dependencies>
                     <dependency>
