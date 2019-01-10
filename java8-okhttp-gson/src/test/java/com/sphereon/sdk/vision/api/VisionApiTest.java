@@ -29,6 +29,7 @@ import com.sphereon.sdk.vision.handler.ApiException;
 import com.sphereon.sdk.vision.model.InputResource;
 import com.sphereon.sdk.vision.model.VisionJob;
 import com.sphereon.sdk.vision.model.VisionSettings;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -54,7 +55,12 @@ public class VisionApiTest {
         if (testlocal) {
             api.getApiClient().setBasePath("http://127.0.0.1:18100");
         }
-        api.getApiClient().setAccessToken(System.getenv("SPHEREON_TEST_ACCESSTOKEN"));
+        String token = System.getProperty("sphereon.test.accesstoken", System.getenv("sphereon.test.accesstoken"));
+        token = "c89ea80f-9567-37a4-a7b5-75446704ea71";
+        if (token == null) {
+            throw new RuntimeException("Please configure the api token. The token can be found on https://store.sphereon.com/store/");
+        }
+        api.getApiClient().setAccessToken(token);
     }
 
     private VisionSettings createJobSettings() {
@@ -75,23 +81,8 @@ public class VisionApiTest {
      */
     @Test
     public void _01_createVisionJobTest() throws ApiException {
-
         job = api.createVisionJob(createJobSettings());
-        assertEquals("UPLOAD_RESOURCES", job.getState().getValue());
-    }
-
-    /**
-     * Get a vision job
-     * <p>
-     * Get a Vision job. After processing the vision job contains the results.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void _02_getVisionJobTest() throws ApiException {
-        String jobId = job.getJobId();
-        VisionJob response = api.getVisionJob(jobId);
-        assertEquals("UPLOAD_RESOURCES", response.getState().getValue());
+        assertEquals(VisionJob.StateEnum.UPLOAD_RESOURCES, job.getState());
     }
 
     /**
@@ -102,11 +93,15 @@ public class VisionApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void _03_uploadFileTest() throws ApiException {
-        String jobId = job.getJobId();
-        File stream = new File("src\\test\\java\\com\\sphereon\\sdk\\vision\\api\\label-dog.jpg");
-        InputResource response = api.uploadFile(jobId, stream);
-        assertEquals(stream.getName(), response.getStreamLocation().getOriginalFilename());
+    public void _02_uploadFileTest() throws ApiException {
+        try {
+            String jobId = job.getJobId();
+            File stream = new File("src/test/resources/label-dog.jpg");
+            InputResource response = api.uploadFile(jobId, stream);
+            assertEquals(stream.getName(), response.getStreamLocation().getOriginalFilename());
+        } catch (ApiException e) {
+            Assert.fail(String.format("test failed with response from api: code=%s, response=%s", e.getCode(), e.getResponseBody()));
+        }
     }
 
     /**
@@ -117,11 +112,34 @@ public class VisionApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void _04_submitVisionJobTest() throws ApiException {
+    public void _03_submitVisionJobTest() throws ApiException {
         String jobId = job.getJobId();
         VisionSettings settings = createJobSettings();
         VisionJob response = api.submitVisionJob(jobId, settings);
-        assertEquals("PROCESSING", response.getState().getValue());
+        assertEquals(VisionJob.StateEnum.PROCESSING, response.getState());
+    }
+
+    /**
+     * Get a vision job
+     * <p>
+     * Get a Vision job. After processing the vision job contains the results.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _04_getVisionJobTest() throws ApiException, InterruptedException {
+        String jobId = job.getJobId();
+        VisionJob response = null;
+        int count = 0;
+        boolean finished = false;
+        while (!finished && count <= 120) {
+            Thread.sleep(1000);
+            count++;
+
+            response = api.getVisionJob(jobId);
+            finished = response.getState() != VisionJob.StateEnum.PROCESSING;
+        }
+        assertEquals(response.getStatus().toString(), VisionJob.StateEnum.DONE, response.getState());
     }
 
     /**
@@ -135,6 +153,6 @@ public class VisionApiTest {
     public void _05_deleteVisionJobTest() throws ApiException {
         String jobId = job.getJobId();
         VisionJob response = api.deleteVisionJob(jobId);
-        assertEquals("DELETED", response.getState().getValue());
+        assertEquals(VisionJob.StateEnum.DELETED, response.getState());
     }
 }
