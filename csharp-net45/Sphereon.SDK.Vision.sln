@@ -2,26 +2,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Vision", "src\Sphereon.SDK.Vision\Sphereon.SDK.Vision.csproj", "{7ECB3FE6-A6B3-44B0-8E09-DD4C7EE81687}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Vision", "src\Sphereon.SDK.Vision\Sphereon.SDK.Vision.csproj", "{E118EABD-E865-4010-917E-DFD343AEDA15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Vision.Test", "src\Sphereon.SDK.Vision.Test\Sphereon.SDK.Vision.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
 Global
-GlobalSection(SolutionConfigurationPlatforms) = preSolution
-Debug|Any CPU = Debug|Any CPU
-Release|Any CPU = Release|Any CPU
-EndGlobalSection
-GlobalSection(ProjectConfigurationPlatforms) = postSolution
-{7ECB3FE6-A6B3-44B0-8E09-DD4C7EE81687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-{7ECB3FE6-A6B3-44B0-8E09-DD4C7EE81687}.Debug|Any CPU.Build.0 = Debug|Any CPU
-{7ECB3FE6-A6B3-44B0-8E09-DD4C7EE81687}.Release|Any CPU.ActiveCfg = Release|Any CPU
-{7ECB3FE6-A6B3-44B0-8E09-DD4C7EE81687}.Release|Any CPU.Build.0 = Release|Any CPU
-{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
-{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
-{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
-EndGlobalSection
-GlobalSection(SolutionProperties) = preSolution
-HideSolutionNode = FALSE
-EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E118EABD-E865-4010-917E-DFD343AEDA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E118EABD-E865-4010-917E-DFD343AEDA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E118EABD-E865-4010-917E-DFD343AEDA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E118EABD-E865-4010-917E-DFD343AEDA15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 EndGlobal

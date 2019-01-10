@@ -1,0 +1,756 @@
+{
+  "basePath": "/vision/0.2",
+  "paths": {
+    "/jobs/{jobId}": {
+      "get": {
+        "summary": "Get a vision job",
+        "security": [{"oauth2schema": ["global"]}],
+        "deprecated": false,
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Get a Vision job. After processing the vision job contains the results.",
+        "operationId": "getVisionJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Vision job"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job not found"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobId",
+          "description": "jobId",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Vision"]
+      },
+      "delete": {
+        "summary": "Delete a vision job manually",
+        "security": [{"oauth2schema": ["global"]}],
+        "deprecated": false,
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Delete a vision job manually. This will delete the uploaded resources if not yet deleted after the job is complete.",
+        "operationId": "deleteVisionJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Vision job deleted"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job failed to delete"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Vision job was already deleted or unknown job id"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobId",
+          "description": "jobId",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["Vision"]
+      },
+      "put": {
+        "summary": "Start classification of a vision job",
+        "security": [{"oauth2schema": ["global"]}],
+        "deprecated": false,
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Submit a vision job to start classification.",
+        "operationId": "submitVisionJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/VisionJob"},
+            "description": "Classification started. The vision job response will be returned in the body."
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Classification request could not be processed"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid job id. No response body is supplied"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "jobId",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/VisionSettings"},
+            "in": "body",
+            "name": "settings",
+            "description": "settings",
+            "required": true
+          }
+        ],
+        "tags": ["Vision"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/jobs/{jobId}/streams/multipart": {"post": {
+      "summary": "Upload an image for a vision job",
+      "security": [{"oauth2schema": ["global"]}],
+      "deprecated": false,
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Upload an image for a vision job. Processing will start after submitting the job.",
+      "operationId": "uploadFile",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/InputResource"},
+          "description": "Image uploaded. The vision job response will be returned in the body."
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Image for vision job could not be stored/processed"
+        },
+        "404": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid job id."
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "jobId",
+          "description": "jobId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "in": "formData",
+          "name": "stream",
+          "description": "The binary image to upload for a vision job",
+          "type": "file",
+          "required": true
+        }
+      ],
+      "tags": ["Vision"],
+      "consumes": ["multipart/form-data"]
+    }},
+    "/jobs": {"post": {
+      "summary": "Create a new vision job",
+      "security": [{"oauth2schema": ["global"]}],
+      "deprecated": false,
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Create a new job for the vision operation.",
+      "operationId": "createVisionJob",
+      "responses": {
+        "200": {
+          "schema": {"$ref": "#/definitions/VisionJob"},
+          "description": "Vision job"
+        },
+        "201": {
+          "schema": {"$ref": "#/definitions/VisionJob"},
+          "description": "Created"
+        },
+        "400": {
+          "schema": {"$ref": "#/definitions/ErrorResponse"},
+          "description": "Invalid vision settings"
+        }
+      },
+      "parameters": [{
+        "schema": {"$ref": "#/definitions/VisionSettings"},
+        "in": "body",
+        "name": "visionSettings",
+        "description": "visionSettings",
+        "required": true
+      }],
+      "tags": ["Vision"],
+      "consumes": ["application/json;charset=UTF-8"]
+    }}
+  },
+  "host": "gw.api.cloud.sphereon.com",
+  "schemes": ["https"],
+  "securityDefinitions": {"oauth2schema": {
+    "tokenUrl": "https://gw.api.cloud.sphereon.com/token",
+    "scopes": {"global": "accessEverything"},
+    "type": "oauth2",
+    "flow": "application"
+  }},
+  "definitions": {
+    "InputResource": {
+      "type": "object",
+      "title": "InputResource",
+      "properties": {
+        "streamLocation": {
+          "xml": {
+            "name": "streamLocation",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The storage location of the input file.",
+          "readOnly": true,
+          "$ref": "#/definitions/StreamLocation"
+        },
+        "id": {
+          "xml": {
+            "name": "id",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "An id that links the file with the input and result.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "StorageSettings": {
+      "type": "object",
+      "title": "StorageSettings",
+      "properties": {
+        "container": {
+          "xml": {
+            "name": "container",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The container id or name in which the files are stored.",
+          "type": "string"
+        },
+        "lifecycle": {
+          "xml": {
+            "name": "lifecycle",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The lifecycle of the stored files.",
+          "$ref": "#/definitions/Lifecycle"
+        },
+        "credentials": {
+          "xml": {
+            "name": "credentials",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The credentials from the backed.",
+          "$ref": "#/definitions/Credentials"
+        },
+        "backendType": {
+          "xml": {
+            "name": "backendType",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The backend type that is used to store files.",
+          "type": "string",
+          "enum": [
+            "SPHEREON_CLOUD_STORAGE",
+            "AMAZON_S3",
+            "MS_AZURE_BLOB_STORAGE",
+            "GOOGLE_CLOUD_STORAGE",
+            "XILLIO_ENGINE"
+          ]
+        },
+        "backend": {
+          "xml": {
+            "name": "backend",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The backend id or name that is used to store files.",
+          "type": "string"
+        }
+      }
+    },
+    "Lifecycle": {
+      "description": "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after processing the job.",
+      "type": "object",
+      "title": "Lifecycle",
+      "properties": {
+        "action": {
+          "xml": {
+            "name": "action",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The action to perform. Delete the files or leave the files exists after processing. The files can be delete manually.",
+          "type": "string",
+          "enum": [
+            "DELETE",
+            "NONE"
+          ]
+        },
+        "type": {
+          "xml": {
+            "name": "type",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "Determine when to delete the job and associated files.\r\nJOB_DONE means delete directly after the job finished processing.",
+          "type": "string",
+          "enum": ["JOB_DONE"]
+        }
+      }
+    },
+    "VendorResult": {
+      "type": "object",
+      "title": "VendorResult",
+      "properties": {
+        "labels": {
+          "xml": {
+            "name": "labels",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "labels that are predicted",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Tag"}
+        },
+        "ocr": {
+          "xml": {
+            "name": "ocr",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "ocr result",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Tag"}
+        }
+      }
+    },
+    "Error": {
+      "description": "An error",
+      "type": "object",
+      "title": "Error",
+      "required": [
+        "code",
+        "level",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "xml": {
+            "name": "code",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        },
+        "level": {
+          "xml": {
+            "name": "level",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "FATAL"
+          ]
+        },
+        "cause": {
+          "xml": {
+            "name": "cause",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/Error"
+        },
+        "message": {
+          "xml": {
+            "name": "message",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        }
+      }
+    },
+    "StreamLocation": {
+      "description": "Location record of data stream",
+      "type": "object",
+      "title": "StreamLocation",
+      "properties": {
+        "folderPath": {
+          "xml": {
+            "name": "folderPath",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        },
+        "filename": {
+          "xml": {
+            "name": "filename",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        },
+        "name": {"type": "string"},
+        "id": {
+          "xml": {
+            "name": "id",
+            "attribute": false,
+            "wrapped": false
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "containerId": {
+          "xml": {
+            "name": "containerId",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        },
+        "originalFilename": {
+          "xml": {
+            "name": "originalFilename",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response",
+      "type": "object",
+      "title": "ErrorResponse",
+      "properties": {"errors": {
+        "xml": {
+          "name": "errors",
+          "attribute": false,
+          "wrapped": false
+        },
+        "type": "array",
+        "items": {"$ref": "#/definitions/Error"}
+      }}
+    },
+    "Result": {
+      "type": "object",
+      "title": "Result",
+      "properties": {
+        "filename": {
+          "xml": {
+            "name": "filename",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The input filename.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendorResults": {
+          "xml": {
+            "name": "vendorResults",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The results for specific vendor.",
+          "readOnly": true,
+          "additionalProperties": {"$ref": "#/definitions/VendorResult"},
+          "type": "object"
+        },
+        "labels": {
+          "xml": {
+            "name": "labels",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The labels that are predicted on the input.",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Tag"}
+        },
+        "ocr": {
+          "xml": {
+            "name": "ocr",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The ocr result that are found on the input. ",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Tag"}
+        }
+      }
+    },
+    "StatusMessage": {
+      "type": "object",
+      "title": "StatusMessage",
+      "properties": {
+        "time": {
+          "xml": {
+            "name": "time",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "date-time",
+          "description": "The time that the status message occurred.",
+          "type": "string"
+        },
+        "message": {
+          "xml": {
+            "name": "message",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse.",
+          "type": "string"
+        }
+      }
+    },
+    "VisionJob": {
+      "description": "The Vision tests. Has access to the tests settings.",
+      "type": "object",
+      "title": "VisionJob",
+      "required": ["inputs"],
+      "properties": {
+        "completionTime": {
+          "xml": {
+            "name": "completionTime",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "date-time",
+          "description": "The completion date/time of this tests in ISO 8601 format.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "jobId": {
+          "description": "The job id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "settings": {
+          "xml": {
+            "name": "settings",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The settings used during execution of the vision task.",
+          "$ref": "#/definitions/VisionSettings"
+        },
+        "creationTime": {
+          "xml": {
+            "name": "creationTime",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "date-time",
+          "description": "The creation date/time of this tests in ISO 8601 format.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "inputs": {
+          "xml": {
+            "name": "inputs",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The input images. Currently supported inputs are: jpeg, png, bmp.",
+          "type": "array",
+          "items": {"$ref": "#/definitions/InputResource"}
+        },
+        "updateTime": {
+          "xml": {
+            "name": "updateTime",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "date-time",
+          "description": "The last update date/time of this tests in ISO 8601 format.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "state": {
+          "xml": {
+            "name": "state",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The status of the vision job,",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "UPLOAD_RESOURCES",
+            "PROCESSING",
+            "DONE",
+            "ERROR",
+            "DELETED"
+          ]
+        },
+        "results": {
+          "xml": {
+            "name": "results",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The tags that are predicted for each input.",
+          "readOnly": true,
+          "additionalProperties": {"$ref": "#/definitions/Result"},
+          "type": "object"
+        },
+        "queueTime": {
+          "xml": {
+            "name": "queueTime",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "date-time",
+          "description": "The queue date/time of this tests in ISO 8601 format.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "xml": {
+            "name": "status",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "A list of status messages. A status message, which can be informational, warning or error. A message here does not indicate an error perse.",
+          "type": "array",
+          "items": {"$ref": "#/definitions/StatusMessage"}
+        }
+      }
+    },
+    "Tag": {
+      "description": "Vision classification tag",
+      "type": "object",
+      "title": "Tag",
+      "properties": {
+        "confidence": {
+          "xml": {
+            "name": "confidence",
+            "attribute": false,
+            "wrapped": false
+          },
+          "format": "double",
+          "description": "The confidence the tag is predicted.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "name": {
+          "xml": {
+            "name": "name",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The name of the tag.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "VisionSettings": {
+      "description": "Vision settings",
+      "type": "object",
+      "title": "VisionSettings",
+      "properties": {
+        "storageProvider": {
+          "xml": {
+            "name": "storageProvider",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The provider of the storage.",
+          "type": "string",
+          "enum": ["API_SUPPLIER"]
+        },
+        "storageSettings": {
+          "xml": {
+            "name": "storageSettings",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The settings of which storage is used to store images. The settings should be provided dependent on the StorageProvider setting.",
+          "$ref": "#/definitions/StorageSettings"
+        },
+        "vendor": {
+          "xml": {
+            "name": "vendor",
+            "attribute": false,
+            "wrapped": false
+          },
+          "type": "string",
+          "enum": [
+            "GOOGLE_VISION",
+            "MS_AZURE_VISION",
+            "CLARIFAI",
+            "AWS"
+          ]
+        },
+        "detectionTypes": {
+          "xml": {
+            "name": "detectionTypes",
+            "attribute": false,
+            "wrapped": false
+          },
+          "description": "The type of vision detection that should be performed on images. Different vendors support different detection types. All vendors support at least label detection.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "LABEL",
+              "TEXT",
+              "FACIAL",
+              "LOGO",
+              "HANDWRITTEN"
+            ]
+          }
+        }
+      }
+    },
+    "Credentials": {
+      "type": "object",
+      "title": "Credentials",
+      "properties": {
+        "credentialType": {
+          "type": "string",
+          "enum": [
+            "NoCredentials",
+            "OAuthCredentials",
+            "BearerTokenCredentials",
+            "UsernamePasswordCredentials",
+            "OAuth2ClientCredentials"
+          ]
+        },
+        "authenticationProvider": {
+          "type": "string",
+          "enum": [
+            "API_SUPPLIER",
+            "API_IMPLEMENTER"
+          ]
+        }
+      }
+    }
+  },
+  "swagger": "2.0",
+  "info": {
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact": {
+      "name": "Sphereon DevOps Team",
+      "url": "https://sphereon.com",
+      "email": "dev@sphereon.com"
+    },
+    "description": "Sphereon Vision APIs",
+    "termsOfService": "https://sphereon.com",
+    "title": "Vision",
+    "version": "0.2"
+  },
+  "tags": [{
+    "name": "Vision",
+    "description": "Vision related API"
+  }]
+}
