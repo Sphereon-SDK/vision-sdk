@@ -42,7 +42,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * API tests for VisionApi
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisionApiTest {
 
     private static VisionJob job;

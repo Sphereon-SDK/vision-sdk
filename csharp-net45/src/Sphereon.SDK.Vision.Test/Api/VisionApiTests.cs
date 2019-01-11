@@ -28,7 +28,8 @@ using System.Linq;
 using System.Reflection;
 using RestSharp;
 using NUnit.Framework;
-
+using System.Threading.Tasks;
+using System.Threading;
 using Sphereon.SDK.Vision.Client;
 using Sphereon.SDK.Vision.Api;
 using Sphereon.SDK.Vision.Model;
@@ -46,14 +47,24 @@ namespace Sphereon.SDK.Vision.Test
     public class VisionApiTests
     {
         private VisionApi instance;
-
+        private Boolean isLocal = true;
+        private static VisionJob visionJob;
         /// <summary>
         /// Setup before each unit test
         /// </summary>
         [SetUp]
         public void Init()
         {
-            instance = new VisionApi();
+            if (isLocal)
+            {
+                instance = new VisionApi("http://127.0.0.1:18100");
+            }
+            else
+            {
+                instance = new VisionApi();
+            }
+
+            instance.Configuration.AccessToken = Environment.GetEnvironmentVariable("SPHEREON_TEST_ACCESSTOKEN");
         }
 
         /// <summary>
@@ -68,76 +79,105 @@ namespace Sphereon.SDK.Vision.Test
         /// <summary>
         /// Test an instance of VisionApi
         /// </summary>
-        [Test]
+        [Test, Order(0)]
         public void InstanceTest()
         {
             // TODO uncomment below to test 'IsInstanceOfType' VisionApi
-            Assert.IsInstanceOfType(typeof(VisionApi), instance, "instance is a VisionApi");
+            Assert.IsInstanceOf(typeof(VisionApi), instance, "instance is a VisionApi");
         }
 
         
         /// <summary>
         /// Test CreateVisionJob
         /// </summary>
-        [Test]
+        [Test, Order(1)]
         public void CreateVisionJobTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
             VisionSettings visionSettings = new VisionSettings();
-            var response = instance.CreateVisionJob(visionSettings);
-            Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            visionSettings.Vendor = VisionSettings.VendorEnum.GOOGLEVISION;
+            List<VisionSettings.DetectionTypesEnum> detectionTypes = new List<VisionSettings.DetectionTypesEnum>();
+            detectionTypes.Add(VisionSettings.DetectionTypesEnum.LABEL);
+            visionSettings.DetectionTypes = detectionTypes;
+            visionSettings.StorageProvider = VisionSettings.StorageProviderEnum.SUPPLIER;
+
+            visionJob = instance.CreateVisionJob(visionSettings);
+            Assert.IsInstanceOf<VisionJob> (visionJob, "response is VisionJob");
+            Assert.AreEqual("UPLOADRESOURCES", visionJob.State.ToString());
         }
-        
+
         /// <summary>
-        /// Test DeleteVisionJob
+        /// Test UploadFile
         /// </summary>
-        [Test]
-        public void DeleteVisionJobTest()
+        [Test, Order(2)]
+        public void UploadFileTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string jobId = null;
-            //var response = instance.DeleteVisionJob(jobId);
-            //Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            // TODO change path to project specific
+            string jobId = visionJob.JobId;
+            //string fileName = "label-dog.jpg";
+            //string path = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
+            Stream stream = new FileStream("C:/Users/Gabriel/IdeaProjects/vision-sdk/csharp-net45/Resources/label-dog.jpg", FileMode.Open);
+            var response = instance.UploadFile(jobId, stream);
+            Assert.IsInstanceOf<InputResource>(response, "response is InputResource");
+            Assert.AreEqual("label-dog.jpg", response.StreamLocation.OriginalFilename);
+        }
+
+        /// <summary>
+        /// Test SubmitVisionJob
+        /// </summary>
+        [Test, Order(3)]
+        public void SubmitVisionJobTest()
+        {
+            string jobId = visionJob.JobId;
+            VisionSettings settings = visionJob.Settings;
+            var response = instance.SubmitVisionJob(jobId, settings);
+            Assert.IsInstanceOf<VisionJob>(response, "response is VisionJob");
+            Assert.AreEqual("PROCESSING", response.State.ToString());
         }
         
         /// <summary>
         /// Test GetVisionJob
         /// </summary>
-        [Test]
+        [Test, Order(4)]
         public void GetVisionJobTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string jobId = null;
-            //var response = instance.GetVisionJob(jobId);
-            //Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            var delay = 1;
+            string jobId = visionJob.JobId;
+            var response = instance.GetVisionJob(jobId);
+
+            var listener = Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(delay);
+                    if (response.State.ToString().Equals("DONE"))
+                    {
+                        break;
+                    }
+                    response = instance.GetVisionJob(jobId);
+                }
+            });
+
+            listener.Wait();
+           
+            Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            Assert.AreEqual("DONE", response.State.ToString());
+            List<KeyValuePair<string, Result>> resultList = response.Results.ToList();
+            
+            Assert.AreEqual("a", response.Results.Values.GE);
         }
-        
+
         /// <summary>
-        /// Test SubmitVisionJob
+        /// Test DeleteVisionJob
         /// </summary>
-        [Test]
-        public void SubmitVisionJobTest()
+        [Test, Order(5)]
+        public void DeleteVisionJobTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string jobId = null;
-            //VisionSettings settings = null;
-            //var response = instance.SubmitVisionJob(jobId, settings);
-            //Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            string jobId = visionJob.JobId;
+            var response = instance.DeleteVisionJob(jobId);
+            Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
+            Assert.AreEqual("DELETED", response.State.ToString());
         }
-        
-        /// <summary>
-        /// Test UploadFile
-        /// </summary>
-        [Test]
-        public void UploadFileTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string jobId = null;
-            //System.IO.Stream stream = null;
-            //var response = instance.UploadFile(jobId, stream);
-            //Assert.IsInstanceOf<InputResource> (response, "response is InputResource");
-        }
-        
+
     }
 
 }
