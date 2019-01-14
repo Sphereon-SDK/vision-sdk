@@ -43,7 +43,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * API tests for VisionApi
  */
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisionApiTest {
 
     private static VisionJob job;
@@ -55,8 +55,8 @@ public class VisionApiTest {
         if (testlocal) {
             api.getApiClient().setBasePath("http://127.0.0.1:18100");
         }
-        String token = System.getProperty("sphereon.test.accesstoken", System.getenv("sphereon.test.accesstoken"));
-        token = "c89ea80f-9567-37a4-a7b5-75446704ea71";
+//        String token = System.getProperty("sphereon.test.accesstoken", System.getenv("sphereon.test.accesstoken"));
+        String token = "c89ea80f-9567-37a4-a7b5-75446704ea71";
         if (token == null) {
             throw new RuntimeException("Please configure the api token. The token can be found on https://store.sphereon.com/store/");
         }
