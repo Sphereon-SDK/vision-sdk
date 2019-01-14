@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.sphereon.sdk</groupId>
     <artifactId>vision-sdk-java8</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.sphereon.sdk:vision-sdk-java8:0.1.0-SNAPSHOT"
+compile "com.sphereon.sdk:vision-sdk-java8:0.1.0"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/vision-sdk-java8-0.1.0-SNAPSHOT.jar
+* target/vision-sdk-java8-0.1.0.jar
 * target/lib/*.jar
 
 ## Getting Started
@@ -60,7 +60,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import com.sphereon.sdk.vision.handler.*;
 import com.sphereon.sdk.vision.handler.auth.*;
-import com.sphereon.sdk.vision.model.*;
+import com.sphereon.sdk.vision.handler.model.*;
 import com.sphereon.sdk.vision.api.VisionApi;
 
 import java.io.File;
@@ -76,12 +76,12 @@ public class VisionApiExample {
         oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
         VisionApi apiInstance = new VisionApi();
-        String jobid = "jobid_example"; // String | jobid
+        VisionSettings visionSettings = new VisionSettings(); // VisionSettings | visionSettings
         try {
-            VisionJob result = apiInstance.classifyJob(jobid);
+            VisionJob result = apiInstance.createVisionJob(visionSettings);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling VisionApi#classifyJob");
+            System.err.println("Exception when calling VisionApi#createVisionJob");
             e.printStackTrace();
         }
     }
@@ -91,24 +91,30 @@ public class VisionApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://gw.api.cloud.sphereon.com/*
+All URIs are relative to *https://gw.api.cloud.sphereon.com/vision/0.2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*VisionApi* | [**classifyJob**](docs/VisionApi.md#classifyJob) | **PUT** /barcode/0.1/{jobid} | Start classification of a vision job
-*VisionApi* | [**createVisionJob**](docs/VisionApi.md#createVisionJob) | **POST** /barcode/0.1/ | Create a new vision job
-*VisionApi* | [**deleteVisionJob**](docs/VisionApi.md#deleteVisionJob) | **DELETE** /barcode/0.1/{jobid} | Delete a vision job manually
-*VisionApi* | [**getClassificationResult**](docs/VisionApi.md#getClassificationResult) | **GET** /barcode/0.1/{jobid}/result | Get classification response of a vision job
-*VisionApi* | [**getVisionJob**](docs/VisionApi.md#getVisionJob) | **GET** /barcode/0.1/{jobid} | Get a vision job
-*VisionApi* | [**uploadFile**](docs/VisionApi.md#uploadFile) | **POST** /barcode/0.1/{jobid} | Upload an image for a vision job
+*VisionApi* | [**createVisionJob**](docs/VisionApi.md#createVisionJob) | **POST** /jobs | Create a new vision job
+*VisionApi* | [**deleteVisionJob**](docs/VisionApi.md#deleteVisionJob) | **DELETE** /jobs/{jobId} | Delete a vision job manually
+*VisionApi* | [**getVisionJob**](docs/VisionApi.md#getVisionJob) | **GET** /jobs/{jobId} | Get a vision job
+*VisionApi* | [**submitVisionJob**](docs/VisionApi.md#submitVisionJob) | **PUT** /jobs/{jobId} | Start classification of a vision job
+*VisionApi* | [**uploadFile**](docs/VisionApi.md#uploadFile) | **POST** /jobs/{jobId}/streams/multipart | Upload an image for a vision job
 
 
 ## Documentation for Models
 
- - [ClassificationResponse](docs/ClassificationResponse.md)
+ - [Credentials](docs/Credentials.md)
  - [Error](docs/Error.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [InputResource](docs/InputResource.md)
+ - [Lifecycle](docs/Lifecycle.md)
+ - [Result](docs/Result.md)
+ - [StatusMessage](docs/StatusMessage.md)
+ - [StorageSettings](docs/StorageSettings.md)
+ - [StreamLocation](docs/StreamLocation.md)
  - [Tag](docs/Tag.md)
+ - [VendorResult](docs/VendorResult.md)
  - [VisionJob](docs/VisionJob.md)
  - [VisionSettings](docs/VisionSettings.md)
 
@@ -127,7 +133,7 @@ Authentication schemes defined for the API:
 
 ## Recommendation
 
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issue.
 
 ## Author
 
