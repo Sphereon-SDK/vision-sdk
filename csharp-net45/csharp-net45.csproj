@@ -85,7 +85,9 @@
     <Content Include=".idea\modules.xml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
-    <None Include="Resources\label-dog.jpg" />
+    <None Include="Resources\label-dog.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="src\Sphereon.SDK.Vision.Test\Sphereon.SDK.Vision.Test.csproj" />
     <Content Include="src\Sphereon.SDK.Vision\Sphereon.SDK.Vision.csproj" />
   </ItemGroup>

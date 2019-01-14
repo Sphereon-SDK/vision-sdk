@@ -113,9 +113,7 @@ namespace Sphereon.SDK.Vision.Test
         {
             // TODO change path to project specific
             string jobId = visionJob.JobId;
-            //string fileName = "label-dog.jpg";
-            //string path = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
-            Stream stream = new FileStream("C:/Users/Gabriel/IdeaProjects/vision-sdk/csharp-net45/Resources/label-dog.jpg", FileMode.Open);
+            Stream stream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\Resources\label-dog.jpg"), FileMode.Open);
             var response = instance.UploadFile(jobId, stream);
             Assert.IsInstanceOf<InputResource>(response, "response is InputResource");
             Assert.AreEqual("label-dog.jpg", response.StreamLocation.OriginalFilename);
@@ -146,14 +144,15 @@ namespace Sphereon.SDK.Vision.Test
 
             var listener = Task.Factory.StartNew(() =>
             {
-                while (true)
+                while (response.State.ToString().Equals("PROCESSING"))
                 {
                     Thread.Sleep(delay);
+                    response = instance.GetVisionJob(jobId);
+
                     if (response.State.ToString().Equals("DONE"))
                     {
                         break;
                     }
-                    response = instance.GetVisionJob(jobId);
                 }
             });
 
@@ -162,8 +161,8 @@ namespace Sphereon.SDK.Vision.Test
             Assert.IsInstanceOf<VisionJob> (response, "response is VisionJob");
             Assert.AreEqual("DONE", response.State.ToString());
             List<KeyValuePair<string, Result>> resultList = response.Results.ToList();
-            
-            Assert.AreEqual("a", response.Results.Values.GE);
+            List<Tag> labels = resultList.First().Value.Labels;
+            Assert.IsTrue(labels.Count >= 1);
         }
 
         /// <summary>
