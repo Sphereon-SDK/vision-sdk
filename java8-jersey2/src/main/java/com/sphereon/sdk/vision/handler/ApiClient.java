@@ -48,7 +48,7 @@ import com.sphereon.sdk.vision.handler.auth.HttpBasicAuth;
 import com.sphereon.sdk.vision.handler.auth.ApiKeyAuth;
 import com.sphereon.sdk.vision.handler.auth.OAuth;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-23T03:02:07.831+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2018-03-22T01:24:13.190+01:00")
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private String basePath = "https://gw.api.cloud.sphereon.com/";
@@ -73,7 +73,7 @@ public class ApiClient {
     this.dateFormat = new RFC3339DateFormat();
 
     // Set default User-Agent.
-    setUserAgent("Swagger-Codegen/0.1.0-SNAPSHOT/java");
+    setUserAgent("Swagger-Codegen/0.1.1-SNAPSHOT/java");
 
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
