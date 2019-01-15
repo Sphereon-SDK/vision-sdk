@@ -4,7 +4,7 @@
 	<groupId>com.sphereon.sdk</groupId>
 	<artifactId>vision-sdk-generator</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.0</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<name>Vision SDK Generator</name>
 
 	<properties>
