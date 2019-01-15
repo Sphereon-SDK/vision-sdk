@@ -18,8 +18,8 @@
 		<sdk-package>com.sphereon.sdk.vision</sdk-package>
 		<sdk-package-javascript>SphereonSDKVision</sdk-package-javascript>
 		<sdk-package-csharp>Sphereon.SDK.Vision</sdk-package-csharp>
-		<sdk-package-version>0.2.0</sdk-package-version>
-		<sdk-package-version_java>v0_2_0</sdk-package-version_java>
+		<sdk-package-version>0.2.1</sdk-package-version>
+		<sdk-package-version_java>v0_2_1</sdk-package-version_java>
 
 		<swagger-coden-maven-plugin.version>2.3.1</swagger-coden-maven-plugin.version>
 		<swagger-coden-verbose>true</swagger-coden-verbose>

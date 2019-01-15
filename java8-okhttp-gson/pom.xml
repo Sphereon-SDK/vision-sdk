@@ -5,7 +5,7 @@
     <artifactId>vision-sdk-java8-okhttp-gson</artifactId>
     <packaging>jar</packaging>
     <name>vision-sdk-java8-okhttp-gson</name>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
     <url>https://sphereon.com</url>
     <description>Vision SDK - Java okhttp-gson version</description>
     <scm>
