@@ -1,14 +1,17 @@
 {
   "name": "vision",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Sphereon_Vision_APIs",
-  "license": "Apache-2.0",
+  "license": "Apache License Version 2.0",
   "main": "src/SphereonSDKVision/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
+  "browser": {
+    "fs": false
+  },
   "dependencies": {
-    "superagent": "1.7.1"
+    "superagent": "3.5.2"
   },
   "devDependencies": {
     "mocha": "~2.3.4",

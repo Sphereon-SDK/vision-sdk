@@ -3,9 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**storageProvider** | **String** |  | [optional] 
+**storageProvider** | **String** | The provider of the storage. | [optional] 
+**storageSettings** | [**StorageSettings**](StorageSettings.md) | The settings of which storage is used to store images. The settings should be provided dependent on the StorageProvider setting. | [optional] 
 **vendor** | **String** |  | [optional] 
-**detectionTypes** | **[String]** |  | [optional] 
+**detectionTypes** | **[String]** | The type of vision detection that should be performed on images. Different vendors support different detection types. All vendors support at least label detection. | [optional] 
 
 
 <a name="StorageProviderEnum"></a>
@@ -27,6 +28,8 @@ Name | Type | Description | Notes
 
 * `CLARIFAI` (value: `"CLARIFAI"`)
 
+* `AWS` (value: `"AWS"`)
+
 
 
 
@@ -41,6 +44,8 @@ Name | Type | Description | Notes
 * `FACIAL` (value: `"FACIAL"`)
 
 * `LOGO` (value: `"LOGO"`)
+
+* `HANDWRITTEN` (value: `"HANDWRITTEN"`)
 
 
 

@@ -1,0 +1,185 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{4115D2EC-900E-4B6D-B591-FEC12DD69A93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>csharp_net45</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\..\Nunit\bin\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.5.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.106.6.5\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include=".idea\encodings.xml" />
+    <Content Include=".idea\misc.xml" />
+    <Content Include=".idea\modules.xml" />
+    <Content Include=".idea\vcs.xml" />
+    <Content Include=".idea\workspace.xml" />
+    <None Include="Resources\label-dog.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="src\Sphereon.SDK.Vision.Test\Sphereon.SDK.Vision.Test.csproj" />
+    <Content Include="src\Sphereon.SDK.Vision\Sphereon.SDK.Vision.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".swagger-codegen-ignore" />
+    <None Include=".swagger-codegen\VERSION" />
+    <None Include=".travis.yml" />
+    <None Include="app.config" />
+    <None Include="build.bat" />
+    <None Include="build.sh" />
+    <None Include="csharp-net45.iml" />
+    <None Include="docs\Credentials.md" />
+    <None Include="docs\Error.md" />
+    <None Include="docs\ErrorResponse.md" />
+    <None Include="docs\InputResource.md" />
+    <None Include="docs\Lifecycle.md" />
+    <None Include="docs\Result.md" />
+    <None Include="docs\StatusMessage.md" />
+    <None Include="docs\StorageSettings.md" />
+    <None Include="docs\StreamLocation.md" />
+    <None Include="docs\Tag.md" />
+    <None Include="docs\VendorResult.md" />
+    <None Include="docs\VisionApi.md" />
+    <None Include="docs\VisionJob.md" />
+    <None Include="docs\VisionSettings.md" />
+    <None Include="git_push.sh" />
+    <None Include="mono_nunit_test.sh" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+    <None Include="src\Sphereon.SDK.Vision.Test\packages.config" />
+    <None Include="src\Sphereon.SDK.Vision\packages.config" />
+    <None Include="src\Sphereon.SDK.Vision\Sphereon.SDK.Vision.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Api\VisionApiTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\CredentialsTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\ErrorResponseTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\ErrorTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\InputResourceTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\LifecycleTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\ResultTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\StatusMessageTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\StorageSettingsTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\StreamLocationTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\TagTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\VendorResultTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\VisionJobTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision.Test\Model\VisionSettingsTests.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Api\VisionApi.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\ApiClient.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\ApiException.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\ApiResponse.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\Configuration.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\ExceptionFactory.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\GlobalConfiguration.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\IApiAccessor.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\IReadableConfiguration.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Client\SwaggerDateConverter.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\Credentials.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\Error.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\ErrorResponse.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\InputResource.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\Lifecycle.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\Result.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\StatusMessage.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\StorageSettings.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\StreamLocation.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\Tag.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\VendorResult.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\VisionJob.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Model\VisionSettings.cs" />
+    <Compile Include="src\Sphereon.SDK.Vision\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
+</Project>
