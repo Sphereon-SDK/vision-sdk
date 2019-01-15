@@ -5,18 +5,18 @@
     <artifactId>vision-sdk-java8-okhttp-gson</artifactId>
     <packaging>jar</packaging>
     <name>vision-sdk-java8-okhttp-gson</name>
-    <version>0.2.0-SNAPSHOT</version>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
-    <description>Swagger Java</description>
+    <version>0.2.0</version>
+    <url>https://sphereon.com</url>
+    <description>Vision SDK - Java okhttp-gson version</description>
     <scm>
-        <connection>scm:git:git@github.com:swagger-api/swagger-codegen.git</connection>
-        <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-        <url>https://github.com/swagger-api/swagger-codegen</url>
+        <connection>scm:git:git@github.com:/Sphereon-SDK/vision-sdk.git</connection>
+        <developerConnection>scm:git:git@github.com/Sphereon-SDK/vision-sdk.git</developerConnection>
+        <url>https://github.com/Sphereon-SDK/vision-sdk</url>
     </scm>
 
     <licenses>
         <license>
-            <name>Unlicense</name>
+            <name>Apache2</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
@@ -24,12 +24,23 @@
 
     <developers>
         <developer>
-            <name>Swagger</name>
-            <email>apiteam@swagger.io</email>
-            <organization>Swagger</organization>
-            <organizationUrl>http://swagger.io</organizationUrl>
+            <name>Sphereon Devops Team</name>
+            <email>devops@sphereon.com</email>
+            <organization>Sphereon</organization>
+            <organizationUrl>https://sphereon.com</organizationUrl>
         </developer>
     </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>sphereon-sdk-releases</id>
+            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>sphereon-sdk-snapshots</id>
+            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>

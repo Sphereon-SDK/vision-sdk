@@ -13,6 +13,10 @@
 
 package com.sphereon.sdk.vision.handler;
 
+import com.sphereon.sdk.vision.handler.auth.ApiKeyAuth;
+import com.sphereon.sdk.vision.handler.auth.Authentication;
+import com.sphereon.sdk.vision.handler.auth.HttpBasicAuth;
+import com.sphereon.sdk.vision.handler.auth.OAuth;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
@@ -44,11 +48,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.sphereon.sdk.vision.handler.auth.Authentication;
-import com.sphereon.sdk.vision.handler.auth.HttpBasicAuth;
-import com.sphereon.sdk.vision.handler.auth.ApiKeyAuth;
-import com.sphereon.sdk.vision.handler.auth.OAuth;
 
 public class ApiClient {
 
@@ -85,7 +84,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("Swagger-Codegen/0.2.0-SNAPSHOT/java");
+        setUserAgent("Swagger-Codegen/0.2.0/java");
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications = new HashMap<String, Authentication>();
